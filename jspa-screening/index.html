@@ -491,6 +491,24 @@
         .reveal .controls {
             color: var(--accent, #4fc3f7) !important;
         }
+        /* Keep navigation arrows visible and away from notch/safe area */
+        .reveal .controls .navigate-right {
+            right: calc(env(safe-area-inset-right, 0px) + 0.5em) !important;
+        }
+        .reveal .controls .navigate-left {
+            left: calc(env(safe-area-inset-left, 0px) + 0.5em) !important;
+        }
+        @media screen and (max-height: 500px) {
+            .reveal .controls {
+                font-size: 7px !important;
+            }
+            .reveal .controls .navigate-right {
+                right: calc(env(safe-area-inset-right, 0px) + 0.3em) !important;
+            }
+            .reveal .controls .navigate-left {
+                left: calc(env(safe-area-inset-left, 0px) + 0.3em) !important;
+            }
+        }
     </style>
 </head>
 <body>
