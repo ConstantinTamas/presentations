@@ -306,197 +306,279 @@
         }
 
         /* ===== Desktop overflow fixes: per-slide compacting ===== */
-        /* Viewport: 1920x1080, margin 0.04 => usable ~1843x1037
-           Padding: 48px top, 36px bottom => ~953px content height */
+        /* Reveal.js viewport: 1920x1080, margin 0.04
+           Usable slide area: ~1843 x 1037
+           Default padding: 48px top + 36px bottom
+           Available content height: ~953px
+
+           Design goal: every slide must fit within 953px of vertical content.
+           Use consistent reduction levels:
+             - Level 0: default (simple slides with little content)
+             - Level 1: light (reduce spacing, keep font sizes)
+             - Level 2: moderate (reduce spacing + modest font reduction)
+             - Level 3: dense (tighter spacing + font reduction for complex slides)
+        */
+
+        /* --- Slide 2: A kihivas (h2 + large p + 3 cards + callout) --- */
+        /* Estimated height: ~640px. Fits, but cards are very tall due to icon size.
+           Light reduction for visual consistency with overridden slides. */
+        section#problem .card .icon {
+            font-size: 1.8em;
+            margin-bottom: 6px;
+        }
+        section#problem .card {
+            padding: 22px 24px;
+        }
+        section#problem .callout {
+            margin-top: 14px;
+        }
+
+        /* --- Slide 3: A kutatasi kerdes (h2 + large p + 3 cards) --- */
+        /* Estimated height: ~580px. Fits well. Light touch. */
+        section#problem-question .card .icon {
+            font-size: 1.8em;
+            margin-bottom: 6px;
+        }
+        section#problem-question .card {
+            padding: 22px 24px;
+        }
 
         /* --- Slide 4: A megoldas hibrid screening (3 cards + callout) --- */
+        /* Level 1: cards have lots of text, need modest reduction */
         section#overview {
-            padding-top: 36px !important;
-            padding-bottom: 28px !important;
+            padding-top: 40px !important;
+            padding-bottom: 30px !important;
         }
         section#overview .card-grid {
-            margin-top: 12px !important;
+            margin-top: 14px !important;
         }
         section#overview .card {
             padding: 20px 22px !important;
         }
         section#overview .card .label {
             line-height: 1.6 !important;
-            font-size: 0.88em !important;
+            font-size: 0.9em !important;
         }
         section#overview .callout {
-            margin-top: 12px !important;
-            padding: 12px 18px !important;
+            margin-top: 14px !important;
+            padding: 14px 20px !important;
         }
         section#overview .callout p {
-            font-size: 0.92em !important;
+            font-size: 0.93em !important;
             line-height: 1.5 !important;
         }
 
         /* --- Slide 5: A feldolgozas lepessei (6 pipeline steps in 3x2) --- */
+        /* Level 2: 6 items in a grid + trailing paragraph. Needs moderate reduction. */
         section#overview-pipeline {
-            padding-top: 32px !important;
-            padding-bottom: 20px !important;
+            padding-top: 36px !important;
+            padding-bottom: 24px !important;
         }
         section#overview-pipeline .pipeline-grid {
-            gap: 10px !important;
-            margin-top: 10px !important;
+            gap: 12px !important;
+            margin-top: 12px !important;
         }
         section#overview-pipeline .pipeline-step {
-            padding: 12px 16px !important;
+            padding: 14px 18px !important;
         }
         section#overview-pipeline .pipeline-step .step-num {
-            font-size: 0.7em !important;
-            margin-bottom: 3px !important;
+            font-size: 0.72em !important;
+            margin-bottom: 4px !important;
         }
         section#overview-pipeline .pipeline-step .step-title {
-            font-size: 1em !important;
-            margin-bottom: 3px !important;
+            font-size: 1.02em !important;
+            margin-bottom: 4px !important;
         }
         section#overview-pipeline .pipeline-step .step-desc {
-            font-size: 0.75em !important;
+            font-size: 0.78em !important;
             line-height: 1.4 !important;
         }
 
+        /* --- Slide 6: Adatforrasok es duplikatum (two-col cards + callout) --- */
+        /* Estimated height: ~520px. Fits well. Light consistency touch. */
+        section#sources .callout {
+            margin-top: 18px;
+        }
+        section#sources .card {
+            padding: 22px 24px;
+        }
+
         /* --- Slide 7: Kulcsszo-jeloles (2 paragraphs + 6 cards in two 3-col grids) --- */
+        /* Level 3: Two grids of 3 cards each + two paragraphs. Dense slide. */
         section#annotation {
             padding-top: 36px !important;
             padding-bottom: 28px !important;
         }
         section#annotation .card-grid {
-            gap: 8px !important;
-            margin-top: 6px !important;
+            gap: 10px !important;
+            margin-top: 8px !important;
         }
         section#annotation .card {
-            padding: 10px 14px !important;
+            padding: 12px 16px !important;
         }
         section#annotation .card .value {
-            font-size: 0.88em !important;
-            margin-bottom: 0;
+            font-size: 0.9em !important;
+            margin-bottom: 2px;
         }
         section#annotation .card .label {
-            font-size: 0.72em !important;
+            font-size: 0.76em !important;
             margin-top: 2px !important;
-            line-height: 1.35 !important;
+            line-height: 1.4 !important;
         }
         section#annotation > p {
             margin-bottom: 0 !important;
-            font-size: 0.92em !important;
+            font-size: 0.95em !important;
         }
         section#annotation h2 {
-            margin-bottom: 0.25em;
+            margin-bottom: 0.3em;
+        }
+
+        /* --- Slide 8: Mit jelent ez az Excelben (h2 + p + example-box + callout) --- */
+        /* Estimated height: ~520px. Fits, but tighten slightly for visual consistency. */
+        section#annotation-excel .example-box {
+            margin-top: 14px;
+        }
+        section#annotation-excel .callout {
+            margin-top: 16px;
+        }
+
+        /* --- Slide 9: Hogyan dont az AI (h2 + p + 3 decision boxes + trailing p) --- */
+        /* Estimated height: ~600px. Fits well. Light consistency. */
+        section#ai .decision-box {
+            padding: 24px;
         }
 
         /* --- Slide 10: Az AI valaszanak strukturaja (JSON block + 6 rule items in two-col) --- */
+        /* Level 2: Two-col with code block left + 6 stacked items right. Moderate. */
         section#ai-response-structure .two-col {
             gap: 28px;
-            margin-top: 8px;
+            margin-top: 10px;
         }
         section#ai-response-structure .rule-list {
-            gap: 5px;
+            gap: 6px;
         }
         section#ai-response-structure .rule-item {
-            padding: 8px 14px;
+            padding: 9px 16px;
         }
         section#ai-response-structure .rule-text {
-            font-size: 0.85em;
+            font-size: 0.88em;
         }
 
         /* --- Slide 11: A valasz mezoi reszletesen (6 cards in 2x3 grid) --- */
+        /* Level 2: 6 field detail cards in 2-col, 3-row grid. Moderate. */
         section#ai-response-fields {
-            padding-top: 36px !important;
+            padding-top: 38px !important;
             padding-bottom: 28px !important;
         }
+        section#ai-response-fields h2 {
+            margin-bottom: 0.15em;
+        }
         section#ai-response-fields > div[style*="grid-template-columns"] {
-            gap: 8px !important;
-            margin-top: 8px !important;
+            gap: 16px !important;
+            margin-top: 12px !important;
+            flex: 1;
+            grid-template-rows: 1fr 1fr 1fr;
+            align-content: stretch;
         }
         section#ai-response-fields > div[style*="grid-template-columns"] > .fragment {
-            padding: 10px 14px !important;
+            padding: 20px 24px !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         section#ai-response-fields > div[style*="grid-template-columns"] > .fragment > div:first-child {
-            font-size: 0.85em !important;
-            margin-bottom: 3px !important;
+            font-size: 1em !important;
+            margin-bottom: 6px !important;
         }
         section#ai-response-fields > div[style*="grid-template-columns"] > .fragment > div:last-child {
-            font-size: 0.72em !important;
-            line-height: 1.45 !important;
+            font-size: 0.82em !important;
+            line-height: 1.6 !important;
         }
-        section#ai-response-fields h2 {
-            margin-bottom: 0.2em;
+
+        /* --- Slide 12: Feldolgozasi modok (two-col cards + callout) --- */
+        /* Estimated height: ~550px. Fits. Light touch for consistency. */
+        section#ai-processing-modes .card {
+            padding: 24px;
+        }
+        section#ai-processing-modes .callout {
+            margin-top: 16px;
         }
 
         /* --- Slide 13: Felnott tanulmanyok kezelese (two-col, each with card + example-box) --- */
+        /* Level 2: Two columns each with a card + example box stacked. Moderate. */
         section#ai-adult-studies {
             padding-bottom: 28px !important;
         }
         section#ai-adult-studies .two-col {
-            gap: 24px !important;
-            margin-top: 10px;
+            gap: 28px !important;
+            margin-top: 12px;
         }
         section#ai-adult-studies .card {
-            padding: 16px 20px !important;
+            padding: 18px 22px !important;
         }
         section#ai-adult-studies .card > div:first-child {
-            margin-bottom: 6px !important;
+            margin-bottom: 8px !important;
         }
         section#ai-adult-studies .card .label {
+            font-size: 0.9em;
+            line-height: 1.6 !important;
+        }
+        section#ai-adult-studies .example-box {
+            padding: 14px 18px !important;
+            margin-top: 10px !important;
+        }
+        section#ai-adult-studies .example-box .ex-content {
             font-size: 0.88em;
             line-height: 1.55 !important;
         }
-        section#ai-adult-studies .example-box {
-            padding: 12px 16px !important;
-            margin-top: 8px !important;
-        }
-        section#ai-adult-studies .example-box .ex-content {
-            font-size: 0.85em;
-            line-height: 1.5 !important;
-        }
 
         /* --- Slide 14: Hogyan kerulj el a hibakat? (h2 + p + 6 rule items) --- */
+        /* Level 2: 6 stacked rule items need moderate reduction. */
         section#quality .rule-list {
-            gap: 5px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 10px;
         }
         section#quality .rule-item {
-            padding: 9px 16px;
+            padding: 10px 18px;
         }
         section#quality .rule-text {
-            font-size: 0.85em;
+            font-size: 0.88em;
         }
         section#quality > p {
-            margin-bottom: 0.1em;
+            margin-bottom: 0.15em;
         }
         section#quality h2 {
-            margin-bottom: 0.3em;
+            margin-bottom: 0.35em;
         }
 
         /* --- Slide 15: Belso konzisztencia-ellenorzes (h2 + p + 5 rules + trailing p) --- */
+        /* Level 2: 5 stacked rule items + trailing paragraph. Moderate. */
         section#quality-validation .rule-list {
-            gap: 5px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 10px;
         }
         section#quality-validation .rule-item {
-            padding: 9px 16px;
+            padding: 10px 18px;
         }
         section#quality-validation .rule-text {
-            font-size: 0.85em;
+            font-size: 0.88em;
         }
         section#quality-validation > p {
-            margin-bottom: 0.1em;
+            margin-bottom: 0.15em;
         }
         section#quality-validation > p:last-of-type {
-            margin-top: 12px;
+            margin-top: 14px;
         }
 
         /* --- Slide 16: A dontesi logika (two-col with 3 + 5 rule items) --- */
+        /* Level 2: Two columns, 8 rule items total. Moderate. */
         section#quality-decision-logic {
-            padding-top: 36px !important;
+            padding-top: 38px !important;
             padding-bottom: 28px !important;
         }
         section#quality-decision-logic .two-col {
             gap: 28px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
         section#quality-decision-logic .rule-list {
             gap: 5px !important;
@@ -509,6 +591,11 @@
         }
 
         /* --- Slide 17: Az Excel kimenet (h2 + p + tabs + content + 3-col + 2-col cards) --- */
+        /* Level 3: Most complex slide. Tabs, content area, two card grids. Dense. */
+        section#output {
+            padding-top: 38px !important;
+            padding-bottom: 26px !important;
+        }
         section#output > p {
             margin-bottom: 0 !important;
         }
@@ -516,47 +603,57 @@
             margin-bottom: 0.25em;
         }
         section#output .sheet-tabs {
-            margin-top: 8px !important;
+            margin-top: 10px !important;
         }
         section#output .sheet-tab {
-            padding: 6px 14px !important;
-            font-size: 0.82em !important;
+            padding: 7px 16px !important;
+            font-size: 0.84em !important;
         }
         section#output .sheet-content {
-            padding: 10px 14px !important;
+            padding: 12px 16px !important;
         }
         section#output .sheet-content div {
-            font-size: 0.82em !important;
-            line-height: 1.45 !important;
+            font-size: 0.84em !important;
+            line-height: 1.5 !important;
         }
         section#output .card-grid {
-            margin-top: 6px !important;
-            gap: 8px !important;
+            margin-top: 8px !important;
+            gap: 10px !important;
         }
         section#output .card {
-            padding: 8px 12px !important;
+            padding: 10px 14px !important;
         }
         section#output .card .value {
-            font-size: 0.9em !important;
+            font-size: 0.92em !important;
         }
         section#output .card .label {
-            font-size: 0.72em !important;
+            font-size: 0.76em !important;
+        }
+
+        /* --- Slide 18: Manualis felulbiralat (h2 + p + 2 cards + callout) --- */
+        /* Estimated height: ~620px. Fits, light consistency touch. */
+        section#output-manual .card {
+            padding: 24px;
+        }
+        section#output-manual .callout {
+            margin-top: 16px;
         }
 
         /* --- Slide 19: Inter-rater agreement (confusion matrix + 6 kappa items + callout) --- */
+        /* Level 3: Confusion matrix grid + 6 kappa items + callout. Dense. */
         section#agreement {
-            padding-top: 36px !important;
-            padding-bottom: 24px !important;
+            padding-top: 38px !important;
+            padding-bottom: 26px !important;
         }
         section#agreement > p {
-            margin-bottom: 0.1em;
+            margin-bottom: 0.15em;
         }
         section#agreement h2 {
             margin-bottom: 0.25em;
         }
         section#agreement .two-col {
-            gap: 24px;
-            margin-top: 8px;
+            gap: 28px;
+            margin-top: 10px;
         }
         section#agreement .rule-list {
             gap: 4px !important;
@@ -565,119 +662,372 @@
             padding: 6px 14px !important;
         }
         section#agreement .rule-id {
-            font-size: 0.82em !important;
+            font-size: 0.84em !important;
             min-width: 65px;
         }
         section#agreement .rule-text {
-            font-size: 0.82em !important;
+            font-size: 0.84em !important;
         }
         section#agreement .callout {
-            margin-top: 8px;
-            padding: 10px 16px !important;
+            margin-top: 10px;
+            padding: 10px 18px !important;
         }
         section#agreement .callout p {
             font-size: 0.9em !important;
         }
 
-        /* --- Slide 20: PRISMA Flow Diagram (flowchart + result boxes + trailing p) --- */
+        /* --- Slide 20: Konszenzus kor (consensus round) --- */
+        /* Level 2: Flowchart left + cards right in two-col. Moderate. */
+        section#consensus h2 {
+            margin-bottom: 0.2em;
+        }
+        section#consensus > p {
+            font-size: 0.92em !important;
+            margin-bottom: 0.2em !important;
+        }
+        section#consensus .two-col {
+            gap: 24px;
+            margin-top: 12px;
+            flex: 1;
+            align-items: stretch;
+        }
+        section#consensus .consensus-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        section#consensus .flowchart {
+            margin-top: 0 !important;
+            gap: 0;
+        }
+        section#consensus .flow-step {
+            padding: 10px 20px !important;
+            font-size: 0.9em !important;
+            min-width: auto !important;
+            max-width: none !important;
+        }
+        section#consensus .flow-arrow {
+            padding: 2px 0 !important;
+            font-size: 1em !important;
+            line-height: 1;
+        }
+        section#consensus .consensus-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: center;
+        }
+        section#consensus .card {
+            padding: 16px 20px !important;
+            text-align: left;
+        }
+        section#consensus .card .label {
+            font-size: 0.82em !important;
+            text-align: left;
+            line-height: 1.55;
+        }
+        section#consensus .card-title {
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        /* --- Slide 21: Consensus Results (two-col with stat cards + resolution) --- */
+        /* Level 2: Dense data slide. Moderate reduction. */
+        section#consensus-results {
+            padding-top: 36px !important;
+            padding-bottom: 26px !important;
+        }
+        section#consensus-results h2 {
+            margin-bottom: 0.2em;
+        }
+        section#consensus-results .two-col {
+            flex: 1;
+            align-items: start;
+            gap: 24px;
+            margin-top: 8px;
+        }
+        section#consensus-results .card-grid {
+            gap: 12px !important;
+        }
+        section#consensus-results .card {
+            padding: 16px 18px !important;
+        }
+        section#consensus-results .rule-list {
+            gap: 4px !important;
+        }
+        section#consensus-results .rule-item {
+            padding: 5px 12px !important;
+        }
+        section#consensus-results .callout {
+            margin-top: 8px;
+            padding: 8px 16px !important;
+        }
+        section#consensus-results .callout p {
+            font-size: 0.88em !important;
+        }
+
+        /* --- Slide 22: Consensus Lessons (two-col with root causes + fixes) --- */
+        /* Level 2: 4 text-heavy cards + callout. Moderate reduction. */
+        section#consensus-lessons .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        section#consensus-fixes .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 23: PRISMA Flow Diagram (flowchart + result boxes + trailing p) --- */
+        /* Level 2: Vertical flowchart with 4 main steps + 3 result boxes. Moderate. */
         section#prisma {
-            padding-top: 32px !important;
-            padding-bottom: 20px !important;
+            padding-top: 36px !important;
+            padding-bottom: 24px !important;
         }
         section#prisma h2 {
             margin-bottom: 0.2em;
         }
         section#prisma .flowchart {
-            margin-top: 0 !important;
+            margin-top: 4px !important;
         }
         section#prisma .flow-step {
-            padding: 5px 18px !important;
-            font-size: 0.88em !important;
+            padding: 6px 20px !important;
+            font-size: 0.9em !important;
         }
         section#prisma .flow-arrow {
-            padding: 0 !important;
-            font-size: 0.9em !important;
+            padding: 1px 0 !important;
+            font-size: 0.95em !important;
             line-height: 1;
         }
         section#prisma > p:last-of-type {
-            margin-top: 4px !important;
-            font-size: 0.82em !important;
+            margin-top: 6px !important;
+            font-size: 0.85em !important;
         }
 
-        /* --- Slide 21: Ido es koltseg (3 cards + callout) --- */
+        /* --- Slide 22: Ido es koltseg (3 cards + callout) --- */
+        /* Level 1: 3 cards with icons + callout. Light reduction. */
         section#prisma-cost {
-            padding-top: 32px !important;
-            padding-bottom: 20px !important;
+            padding-top: 36px !important;
+            padding-bottom: 24px !important;
         }
         section#prisma-cost h2 {
-            margin-bottom: 0.25em;
+            margin-bottom: 0.3em;
         }
         section#prisma-cost .card-grid {
-            margin-top: 10px !important;
-            gap: 14px !important;
+            margin-top: 12px !important;
+            gap: 16px !important;
         }
         section#prisma-cost .card {
-            padding: 18px 20px !important;
+            padding: 20px 22px !important;
         }
         section#prisma-cost .card .icon {
             font-size: 1.8em !important;
-            margin-bottom: 6px !important;
+            margin-bottom: 8px !important;
         }
         section#prisma-cost .card .value {
-            font-size: 1.15em !important;
+            font-size: 1.2em !important;
         }
         section#prisma-cost .card .label {
-            margin-top: 4px !important;
-            font-size: 0.82em !important;
-            line-height: 1.45 !important;
+            margin-top: 6px !important;
+            font-size: 0.85em !important;
+            line-height: 1.5 !important;
         }
         section#prisma-cost .callout {
-            margin-top: 14px !important;
-            padding: 12px 18px !important;
+            margin-top: 16px !important;
+            padding: 14px 20px !important;
         }
         section#prisma-cost .callout p {
-            font-size: 0.92em !important;
+            font-size: 0.93em !important;
             line-height: 1.5 !important;
         }
 
-        /* --- Slide 22: Konkluzio (4 cards in 2x2 + 1 standalone card) --- */
+        /* --- Slide 23: Konkluzio (4 cards in 2x2 + 1 standalone card) --- */
+        /* Level 1: 5 compact cards. Light reduction. */
         section#summary .card-grid {
             gap: 12px;
-            margin-top: 8px !important;
+            margin-top: 10px !important;
         }
         section#summary .card-grid .card {
-            padding: 14px 18px !important;
+            padding: 16px 20px !important;
         }
         section#summary > .card {
-            padding: 14px 18px !important;
-            margin-top: 8px !important;
+            padding: 16px 20px !important;
+            margin-top: 10px !important;
         }
         section#summary .label {
             font-size: 0.88em;
         }
 
-        /* --- Slide 23: Technikai osszefoglalo (4 cards in 2x2 grid) --- */
+        /* --- Slide 24: Technikai osszefoglalo (4 cards in 2x2 grid) --- */
+        /* Level 2: 4 dense tech cards. Moderate. */
         section#summary-tech {
-            padding-top: 36px !important;
-            padding-bottom: 24px !important;
+            padding-top: 38px !important;
+            padding-bottom: 26px !important;
         }
         section#summary-tech .card-grid {
-            gap: 8px !important;
-            margin-top: 6px !important;
+            gap: 10px !important;
+            margin-top: 8px !important;
         }
         section#summary-tech .card {
-            padding: 12px 14px !important;
+            padding: 14px 16px !important;
         }
         section#summary-tech .card > div:first-child {
-            font-size: 0.85em !important;
-            margin-bottom: 2px !important;
+            font-size: 0.88em !important;
+            margin-bottom: 3px !important;
         }
         section#summary-tech .card .label {
-            font-size: 0.75em !important;
-            line-height: 1.4 !important;
+            font-size: 0.78em !important;
+            line-height: 1.45 !important;
         }
         section#summary-tech h2 {
-            margin-bottom: 0.2em;
+            margin-bottom: 0.25em;
+        }
+
+        /* ===== Vertical fill: distribute content across full slide height ===== */
+        /* Strategy: give the main content container flex:1 so it grows,
+           then use justify-content/align-content to center or distribute within. */
+
+        /* --- Slide 1: Title — center all content vertically --- */
+        section#title {
+            justify-content: center !important;
+        }
+
+        /* --- Slide 2: A kihivas — card-grid is the main growable area --- */
+        section#problem .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 3: A kutatasi kerdes — card-grid fills remaining space --- */
+        section#problem-question .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 4: A megoldas hibrid screening --- */
+        section#overview .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 5: A feldolgozas lepessei --- */
+        section#overview-pipeline .pipeline-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 6: Adatforrasok es duplikatum --- */
+        section#sources .two-col {
+            flex: 1;
+            align-items: center;
+        }
+
+        /* --- Slide 7: Kulcsszo-jeloles — two card-grids, spread vertically --- */
+        section#annotation {
+            justify-content: space-evenly !important;
+        }
+
+        /* --- Slide 8: Mit jelent ez az Excelben --- */
+        section#annotation-excel {
+            justify-content: center !important;
+        }
+
+        /* --- Slide 9: Hogyan dont az AI --- */
+        section#ai .decision-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 10: Az AI valaszanak strukturaja --- */
+        section#ai-response-structure .two-col {
+            flex: 1;
+            align-items: center;
+        }
+
+        /* --- Slide 11: A valasz mezoi reszletesen (already has flex:1, just ensure centering) --- */
+
+        /* --- Slide 12: Feldolgozasi modok --- */
+        section#ai-processing-modes .two-col {
+            flex: 1;
+            align-items: center;
+        }
+
+        /* --- Slide 13: Felnott tanulmanyok kezelese --- */
+        section#ai-adult-studies .two-col {
+            flex: 1;
+            align-items: center;
+        }
+
+        /* --- Slide 14: Hogyan kerulj el a hibakat — rule-list fills space --- */
+        section#quality .rule-list {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* --- Slide 15: Belso konzisztencia-ellenorzes --- */
+        section#quality-validation .rule-list {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* --- Slide 16: A dontesi logika --- */
+        section#quality-decision-logic .two-col {
+            flex: 1;
+            align-items: start;
+            align-content: center;
+        }
+
+        /* --- Slide 17: Az Excel kimenet — complex, spread evenly --- */
+        section#output {
+            justify-content: space-evenly !important;
+        }
+
+        /* --- Slide 18: Manualis felulbiralat --- */
+        section#output-manual .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 19: Inter-rater agreement --- */
+        section#agreement .two-col {
+            flex: 1;
+            align-items: center;
+        }
+
+        /* --- Slide 20: Konszenzus kor (already has flex:1 on .two-col) --- */
+
+        /* --- Slide 21: Consensus Results --- */
+        /* (flex:1 already set via section#consensus-results .two-col above) */
+
+        /* --- Slide 22: Consensus Lessons --- */
+        /* (flex:1 already set via section#consensus-lessons .two-col above) */
+
+        /* --- Slide 23: PRISMA Flow Diagram --- */
+        section#prisma .flowchart {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* --- Slide 22: Ido es koltseg --- */
+        section#prisma-cost .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 23: Konkluzio — spread cards + standalone card --- */
+        section#summary {
+            justify-content: center !important;
+        }
+        section#summary .card-grid {
+            flex: 1;
+            align-content: center;
+        }
+
+        /* --- Slide 24: Technikai osszefoglalo --- */
+        section#summary-tech .card-grid {
+            flex: 1;
+            align-content: center;
         }
 
         /* ===== Mobile-responsive overrides ===== */
@@ -686,6 +1036,14 @@
             .reveal h2 { font-size: 1.3em; }
             .reveal h3 { font-size: 1.1em; }
             .reveal p  { font-size: 0.95em; }
+
+            /* Disable vertical fill on mobile — content stacks naturally */
+            .reveal .slides section {
+                justify-content: flex-start !important;
+            }
+            .card-grid, .two-col, .pipeline-grid, .decision-grid, .rule-list, .flowchart {
+                flex: initial !important;
+            }
 
             .big-number { font-size: 3.5em; }
             .big-number-label { font-size: 1em; }
@@ -781,6 +1139,10 @@
             .reveal .slides section {
                 padding: 1% 4% 2% 4%;
                 justify-content: flex-start !important;
+            }
+            /* Disable vertical fill in landscape — content must pack tightly */
+            .card-grid, .two-col, .pipeline-grid, .decision-grid, .rule-list, .flowchart {
+                flex: initial !important;
             }
             .reveal h1 { font-size: 1.3em; margin-bottom: 0.15em; }
             .reveal h2 { font-size: 1.1em; margin-bottom: 0.2em; }
@@ -901,6 +1263,8 @@
         <li><a href="#/quality" data-chapter="quality">Minőségbiztosítás</a></li>
         <li><a href="#/output" data-chapter="output">Eredmények</a></li>
         <li><a href="#/agreement" data-chapter="agreement">Egyezés</a></li>
+        <li><a href="#/consensus" data-chapter="consensus">Konszenzus</a></li>
+        <li><a href="#/consensus-results" data-chapter="lessons">Tanulságok</a></li>
         <li><a href="#/prisma" data-chapter="prisma">PRISMA Flow</a></li>
         <li><a href="#/summary" data-chapter="summary">Konklúzió</a></li>
     </ul>
@@ -1514,12 +1878,13 @@
         <section id="output" data-chapter="output">
             <h2>Az Excel kimenet</h2>
             <p style="font-size: 0.95em; color: var(--text-secondary); margin-bottom: 0.1em;">
-                Az eredmények egy áttekinthető Excel fájlba kerülnek, 5 munkalappal:
+                Az eredmények egy áttekinthető Excel fájlba kerülnek, 6 munkalappal:
             </p>
             <div class="sheet-tabs fragment fade-up" style="margin-top: 10px;">
                 <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">Screening</div>
                 <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">Summary</div>
                 <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em; background: rgba(102,187,106,0.15); color: var(--include); border-color: rgba(102,187,106,0.3);">Agreement</div>
+                <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em; background: rgba(255,167,38,0.12); color: var(--maybe); border-color: rgba(255,167,38,0.3);">Consensus</div>
                 <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">Method</div>
                 <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">PRISMA Flow</div>
             </div>
@@ -1561,7 +1926,7 @@
                 </div>
             </div>
             <aside class="notes">
-                Az eredmények egy Excel fájlba kerülnek, öt munkalappal. A Screening lap tartalmazza a fő táblázatot: minden cikk egy sor, mindkét screener döntésével, konfidenciájával és indoklásával, plusz egy egyezés oszloppal (Igen/Részleges/Nem). A reviewer itt tud manuális jegyzeteket is hozzáadni. A Summary lap összesíti az eredményeket. Az Agreement lap tartalmazza az egyezés-elemzést: Cohen's kappa, konfúziós mátrix, és az eltérő döntések listáját. A Method lap dokumentálja a módszertant. A PRISMA Flow lap tartalmazza a PRISMA diagram adatait.
+                Az eredmények egy Excel fájlba kerülnek, hat munkalappal. A Screening lap tartalmazza a fő táblázatot: minden cikk egy sor, mindkét screener döntésével, konfidenciájával és indoklásával, plusz egy egyezés oszloppal (Igen/Részleges/Nem). A reviewer itt tud manuális jegyzeteket is hozzáadni. A Summary lap összesíti az eredményeket. Az Agreement lap tartalmazza az egyezés-elemzést: Cohen's kappa, konfúziós mátrix, és az eltérő döntések listáját. A Consensus Round lap az R1-ben eltérő döntésű cikkek R2 újraértékelését mutatja mindkét screener R1/R2 döntéseivel és konszenzus-jegyzeteivel. A Method lap dokumentálja a módszertant. A PRISMA Flow lap tartalmazza a PRISMA diagram adatait.
             </aside>
         </section>
 
@@ -1604,69 +1969,246 @@
 
         <!-- ==================== AGREEMENT ANALYSIS ==================== -->
         <section id="agreement" data-chapter="agreement">
-            <h2>Inter-rater agreement</h2>
-            <p style="font-size: 0.95em; color: var(--text-secondary); margin-bottom: 0.1em;">
-                A két AI screener egyezését a <span class="accent">Cohen's kappa</span> statisztikával mérjük — ez a véletlen egyezésen túli megbízhatóságot számszerűsíti.
+            <h2>Inter-rater agreement — R1 eredmények</h2>
+            <p style="font-size: 0.92em; color: var(--text-secondary); margin-bottom: 0.1em;">
+                <strong style="color: var(--text-primary);">1 316</strong> cikk screenelve &mdash;
+                egyezés: <strong style="color: var(--include);">1 137</strong> (86,4%) &nbsp;|&nbsp;
+                eltérés: <strong style="color: var(--exclude);">179</strong> (13,6%)
             </p>
             <div class="two-col" style="margin-top: 8px; gap: 24px;">
                 <div class="fragment fade-up">
-                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-align: center;">Konfúziós mátrix</p>
+                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-align: center;">Konfúziós mátrix (R1)</p>
                     <div style="display: grid; grid-template-columns: auto 1fr 1fr 1fr; grid-template-rows: auto 1fr 1fr 1fr; gap: 3px; font-size: 0.8em; text-align: center;">
                         <div></div>
                         <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 6px 4px; color: var(--accent); font-weight: 700; font-size: 0.82em;">OpenAI<br>INCLUDE</div>
                         <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 6px 4px; color: var(--maybe); font-weight: 700; font-size: 0.82em;">OpenAI<br>MAYBE</div>
                         <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 6px 4px; color: var(--exclude); font-weight: 700; font-size: 0.82em;">OpenAI<br>EXCLUDE</div>
                         <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 6px 4px; color: var(--accent); font-weight: 700; font-size: 0.82em; writing-mode: horizontal-tb;">Claude<br>INCLUDE</div>
-                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">&#10003;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">31</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted); font-weight: 600;">10</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted); font-weight: 600;">18</div>
                         <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 6px 4px; color: var(--maybe); font-weight: 700; font-size: 0.82em;">Claude<br>MAYBE</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">&#10003;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted); font-weight: 600;">0</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">8</div>
+                        <div class="matrix-highlight" style="background: rgba(239,83,80,0.25); border-radius: 8px; padding: 8px; color: var(--exclude); font-weight: 900; font-size: 1.3em; border: 2px solid var(--exclude); box-shadow: 0 0 12px rgba(239,83,80,0.3);">150</div>
                         <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 6px 4px; color: var(--exclude); font-weight: 700; font-size: 0.82em;">Claude<br>EXCLUDE</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">&#10003;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted); font-weight: 600;">0</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted); font-weight: 600;">1</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.05em;">1 098</div>
                     </div>
                 </div>
                 <div class="fragment fade-up">
-                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Kappa értelmezés</p>
-                    <div class="rule-list" style="margin-top: 0; gap: 3px;">
-                        <div class="rule-item" style="padding: 5px 12px;">
-                            <div class="rule-id" style="color: var(--exclude); min-width: 65px; font-size: 0.8em;">&lt; 0.00</div>
-                            <div class="rule-text" style="font-size: 0.8em;">Poor (gyenge)</div>
+                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">R1 megállapítások</p>
+                    <div class="rule-list" style="margin-top: 0; gap: 5px;">
+                        <div class="rule-item" style="padding: 7px 14px;">
+                            <div class="rule-id" style="color: var(--include); min-width: 20px; font-size: 0.9em;">1</div>
+                            <div class="rule-text" style="font-size: 0.82em;">Az egyezés az EXCLUDE cikkeknél erős: <strong style="color: var(--text-primary);">1 098</strong> közös kizárás</div>
                         </div>
-                        <div class="rule-item" style="padding: 5px 12px;">
-                            <div class="rule-id" style="color: var(--exclude); min-width: 65px; font-size: 0.8em;">0.00 - 0.20</div>
-                            <div class="rule-text" style="font-size: 0.8em;">Slight (enyhe)</div>
+                        <div class="rule-item" style="padding: 7px 14px;">
+                            <div class="rule-id" style="color: var(--exclude); min-width: 20px; font-size: 0.9em;">2</div>
+                            <div class="rule-text" style="font-size: 0.82em;"><strong style="color: var(--exclude);">150 cikk</strong> (83,8% az eltérésekből): Claude MAYBE, OpenAI EXCLUDE &mdash; a domináns mintázat</div>
                         </div>
-                        <div class="rule-item" style="padding: 5px 12px;">
-                            <div class="rule-id" style="color: var(--maybe); min-width: 65px; font-size: 0.8em;">0.21 - 0.40</div>
-                            <div class="rule-text" style="font-size: 0.8em;">Fair (megfelelő)</div>
+                        <div class="rule-item" style="padding: 7px 14px;">
+                            <div class="rule-id" style="color: var(--maybe); min-width: 20px; font-size: 0.9em;">3</div>
+                            <div class="rule-text" style="font-size: 0.82em;">Claude megengedőbb (MAYBE), OpenAI szigorúbb (EXCLUDE) &mdash; eltérő küszöb</div>
                         </div>
-                        <div class="rule-item" style="padding: 5px 12px;">
-                            <div class="rule-id" style="color: var(--maybe); min-width: 65px; font-size: 0.8em;">0.41 - 0.60</div>
-                            <div class="rule-text" style="font-size: 0.8em;">Moderate (közepes)</div>
-                        </div>
-                        <div class="rule-item" style="padding: 5px 12px;">
-                            <div class="rule-id" style="color: var(--include); min-width: 65px; font-size: 0.8em;">0.61 - 0.80</div>
-                            <div class="rule-text" style="font-size: 0.8em;">Substantial (jelentős)</div>
-                        </div>
-                        <div class="rule-item" style="padding: 5px 12px;">
-                            <div class="rule-id" style="color: var(--include); min-width: 65px; font-size: 0.8em;">0.81 - 1.00</div>
-                            <div class="rule-text" style="font-size: 0.8em;">Almost perfect (csaknem tökéletes)</div>
+                        <div class="rule-item" style="padding: 7px 14px;">
+                            <div class="rule-id" style="color: var(--accent); min-width: 20px; font-size: 0.9em;">4</div>
+                            <div class="rule-text" style="font-size: 0.82em;">Közös INCLUDE csak <strong style="color: var(--text-primary);">31</strong> cikk &mdash; szűk konszenzusos mag</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="callout fragment fade-up" style="margin-top: 8px; padding: 8px 16px;">
                 <p style="color: var(--text-primary); font-size: 0.88em;">
-                    Az eltérő döntésű cikkek listázva vannak <strong>mindkét screener indoklásával</strong> — a reviewer célzottan tudja felülvizsgálni a vitás eseteket.
+                    A <strong style="color: var(--exclude);">150-es cella</strong> a kulcs: Claude "kétség esetén MAYBE" szabálya ütközik OpenAI szigorúbb értelmezésével. A konszenzus kör feladata ennek feloldása.
                 </p>
             </div>
             <aside class="notes">
-                A Cohen's kappa statisztika az inter-rater agreement standard mérőszáma. Az egyszerű százalékos egyezéssel szemben a kappa kiküszöböli a véletlen egyezés hatását. A konfúziós mátrix a 3x3-as döntési tér eloszlását mutatja: Claude sorok, OpenAI oszlopok, INCLUDE / MAYBE / EXCLUDE kategóriákkal. A kappa értelmezési skálán a 0.61 feletti érték már "substantial" egyezést jelent. Az Excel Agreement munkalapján a kappa érték mellett a konfúziós mátrix és az eltérő döntésű cikkek listája is megjelenik — mindkét screener indoklásával együtt. Így a reviewer célzottan tudja felülvizsgálni azokat a cikkeket, ahol a két modell eltérő véleményre jutott.
+                Az R1 eredmények 1316 cikken futottak. Az egyezés 86,4%-os (1137 cikk): ebből 1098 közös EXCLUDE és 31 közös INCLUDE. Az eltérések 179 cikket érintettek. A domináns mintázat a 150-es cella: Claude MAYBE-t mondott, OpenAI EXCLUDE-ot. Ez az eltérések 83,8%-a. A Claude megengedőbb, a "kétség esetén MAYBE" szabály miatt, míg az OpenAI szigorúbban értelmezi a kizárási kritériumokat. A közös INCLUDE mindössze 31 cikk — ez a szűk konszenzusos mag. A konfúziós mátrix vizuálisan is mutatja, hogy a két modell küszöbértéke eltér.
+            </aside>
+        </section>
+
+        <!-- ==================== CONSENSUS ROUND ==================== -->
+        <section id="consensus" data-chapter="consensus">
+            <h2>Konszenzus kör</h2>
+            <p style="color: var(--text-secondary);">
+                Ahol a két screener <strong style="color: var(--exclude);">nem értett egyet</strong> az 1. körben, ott egy 2. körben
+                <span class="accent">újraértékelik</span> a cikket — egymás döntésének ismeretében.
+            </p>
+            <div class="two-col">
+                <div class="consensus-left">
+                    <div class="flowchart">
+                        <div class="flow-step fragment fade-up" style="border-color: var(--exclude);">
+                            <strong style="color: var(--exclude);">R1 — Eltérő döntések</strong><br>
+                            <span style="font-size: 0.85em;"><strong style="color: var(--text-primary);">179 cikk</strong>, ahol Claude &ne; OpenAI</span>
+                        </div>
+                        <div class="flow-arrow fragment fade-up">&#8595;</div>
+                        <div class="flow-step fragment fade-up" style="border-color: var(--accent);">
+                            <strong style="color: var(--accent);">Konszenzus prompt</strong><br>
+                            <span style="font-size: 0.85em;">Mindkét screener látja a <em>saját</em> és a <em>másik</em> R1 döntését + indoklását</span>
+                        </div>
+                        <div class="flow-arrow fragment fade-up">&#8595;</div>
+                        <div class="flow-step fragment fade-up" style="border-color: var(--include);">
+                            <strong style="color: var(--include);">R2 — Újraértékelt döntés</strong><br>
+                            <span style="font-size: 0.85em;">Változtatott-e? + konszenzus-jegyzet + újraszámolt kappa</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="consensus-right fragment fade-up">
+                    <div class="card">
+                        <div class="card-title" style="color: var(--accent);">Amit minden screener kap</div>
+                        <div class="label">
+                            "Te a <strong>MAYBE</strong>-t választottad, mert..."<br>
+                            "A másik screener <strong>EXCLUDE</strong>-ot mondott, mert..."<br>
+                            <span style="color: var(--text-muted);">&#8594; döntsd el újra, indokold, ha változtattál</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title" style="color: var(--include);">Excel — Consensus Round munkalap</div>
+                        <div class="label">
+                            R1 &amp; R2 döntések egymás mellett<br>
+                            <span style="color: var(--maybe); font-weight: 600;">changed</span> jelző + konszenzus-jegyzet<br>
+                            <span style="color: var(--text-muted);">R2 kappa az Agreement munkalapra kerül</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="notes">
+                A konszenzus kör a dual-screener mód legfontosabb minőségbiztosítási eleme. Az 1. körben eltérő döntésű cikkeket mindkét screener újra megvizsgálja — de ezúttal látja a másik screener döntését és indoklását is. A prompt úgy van felépítve, hogy a screener a saját R1 döntését "Your decision"-ként, a másikét "Other screener's decision"-ként kapja. Az R2 döntés tartalmaz egy changed flag-et — változtatott-e véleményt — és egy konszenzus-jegyzetet. Az eredmények egy Consensus Round Excel munkalapon jelennek meg. Az Agreement Analysis munkalapra R2 kappa is kerül a feloldási statisztikákkal együtt. Ez tipikusan 100-200 cikket érint, szekvenciálisan fut.
+            </aside>
+        </section>
+
+        <!-- ==================== LESSONS LEARNED: CONSENSUS RESULTS ==================== -->
+        <section id="consensus-results" data-chapter="lessons">
+            <h2>Konszenzus kör — Eredmények</h2>
+            <div class="two-col" style="margin-top: 8px; gap: 28px;">
+                <div>
+                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 10px;">Ki változtatott?</p>
+                    <div class="card-grid cols-2 fragment fade-up" style="margin-top: 0; gap: 14px;">
+                        <div class="card" style="border-top: 3px solid var(--exclude); padding: 20px 16px;">
+                            <div class="value" style="font-size: 2.2em; color: var(--exclude);">84,9%</div>
+                            <div class="label" style="font-size: 0.85em; margin-top: 4px;">
+                                <strong style="color: var(--text-primary);">Claude</strong> változtatott<br>
+                                <span style="color: var(--text-muted); font-size: 0.88em;">152 / 179 cikk</span>
+                            </div>
+                        </div>
+                        <div class="card" style="border-top: 3px solid var(--include); padding: 20px 16px;">
+                            <div class="value" style="font-size: 2.2em; color: var(--include);">13,4%</div>
+                            <div class="label" style="font-size: 0.85em; margin-top: 4px;">
+                                <strong style="color: var(--text-primary);">OpenAI</strong> változtatott<br>
+                                <span style="color: var(--text-muted); font-size: 0.88em;">24 / 179 cikk</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fragment fade-up" style="margin-top: 12px;">
+                        <p style="font-size: 0.78em; color: var(--text-muted); line-height: 1.6;">
+                            Claude: <strong>143</strong> MAYBE&#8594;EXCLUDE, <strong>6</strong> INCLUDE&#8594;EXCLUDE<br>
+                            OpenAI: <strong>9</strong> EXCLUDE&#8594;INCLUDE, <strong>7</strong> EXCLUDE&#8594;MAYBE
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 10px;">Feloldás</p>
+                    <div class="card fragment fade-up" style="padding: 18px 22px; text-align: left;">
+                        <div style="display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px;">
+                            <span class="value" style="font-size: 1.8em; color: var(--include);">166</span>
+                            <span style="font-size: 1em; color: var(--text-secondary);">/ 179 feloldva <strong style="color: var(--include);">(92,7%)</strong></span>
+                        </div>
+                        <div class="rule-list" style="margin-top: 0; gap: 4px;">
+                            <div class="rule-item" style="padding: 5px 12px;">
+                                <div class="rule-id" style="color: var(--exclude); min-width: 30px; font-size: 0.9em;">148</div>
+                                <div class="rule-text" style="font-size: 0.82em;">&#8594; EXCLUDE</div>
+                            </div>
+                            <div class="rule-item" style="padding: 5px 12px;">
+                                <div class="rule-id" style="color: var(--include); min-width: 30px; font-size: 0.9em;">14</div>
+                                <div class="rule-text" style="font-size: 0.82em;">&#8594; INCLUDE</div>
+                            </div>
+                            <div class="rule-item" style="padding: 5px 12px;">
+                                <div class="rule-id" style="color: var(--maybe); min-width: 30px; font-size: 0.9em;">4</div>
+                                <div class="rule-text" style="font-size: 0.82em;">&#8594; MAYBE</div>
+                            </div>
+                            <div class="rule-item" style="padding: 5px 12px; border: 1px solid rgba(239,83,80,0.3);">
+                                <div class="rule-id" style="color: var(--exclude); min-width: 30px; font-size: 0.9em;">13</div>
+                                <div class="rule-text" style="font-size: 0.82em; color: var(--exclude);">UNRESOLVED</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="callout fragment fade-up" style="margin-top: 10px; padding: 10px 18px;">
+                <p style="color: var(--text-primary); font-size: 0.88em;">
+                    A feloldás <strong style="color: var(--exclude);">egyoldalú</strong> volt &mdash; Claude szinte mindig engedett az OpenAI szigorúbb döntésének. A 148 EXCLUDE feloldásból <strong>143</strong> Claude MAYBE&#8594;EXCLUDE változás.
+                </p>
+            </div>
+            <aside class="notes">
+                A konszenzus kör 179 eltérő döntésű cikket vizsgált újra. Az eredmény drámai aszimmetria: Claude 84,9%-ban (152 cikkben) változtatott, míg az OpenAI csak 13,4%-ban (24 cikk). Claude változásai szinte kizárólag MAYBE-ről EXCLUDE-ra irányultak (143 cikk), plusz 6 INCLUDE-ról EXCLUDE-ra. OpenAI változásai az ellenkező irányba mentek: 9 EXCLUDE-ról INCLUDE-ra, 7 EXCLUDE-ról MAYBE-re. A 179-ből 166 feloldódott (92,7%), de 148 EXCLUDE-ra, tehát a feloldás lényegében Claude alkalmazkodása az OpenAI álláspontjához. 13 cikk maradt UNRESOLVED. Ez rávilágított a sycophancy problémára.
+            </aside>
+        </section>
+
+        <!-- ==================== LESSONS LEARNED: ROOT CAUSES ==================== -->
+        <section id="consensus-lessons" data-chapter="lessons">
+            <h2>Gyökérokok</h2>
+            <p style="color: var(--text-secondary);">Miért volt egyoldalú a konszenzus?</p>
+            <div class="card-grid cols-2" style="margin-top: 20px;">
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--exclude);">
+                    <div style="font-size: 1.1em; font-weight: 700; color: var(--exclude); margin-bottom: 10px;">1. Claude sycophancy</div>
+                    <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.6;">
+                        A konszenzus prompt bátorította az engedést:<br>
+                        <em style="color: var(--text-muted); font-size: 0.9em;">"If the other screener raises a valid point you missed, you should change your decision"</em>
+                    </div>
+                    <div style="margin-top: 14px; padding: 10px 14px; background: rgba(239,83,80,0.08); border-radius: 8px;">
+                        <span style="font-size: 0.85em; color: var(--text-muted);">Claude válasza 6 INCLUDE&#8594;EXCLUDE váltásnál:</span><br>
+                        <em style="color: var(--exclude); font-size: 0.95em;">"Upon reconsideration, the other screener raises a valid point"</em>
+                    </div>
+                </div>
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--maybe);">
+                    <div style="font-size: 1.1em; font-weight: 700; color: var(--maybe); margin-bottom: 10px;">2. OpenAI túlzott szigor</div>
+                    <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.6;">
+                        Diagnosztikus/klasszifikációs vizsgálatokat összemosta a "nem releváns" kategóriával
+                    </div>
+                    <div style="margin-top: 14px; padding: 10px 14px; background: rgba(255,167,38,0.08); border-radius: 8px;">
+                        <span style="font-size: 0.85em; color: var(--text-muted);">Kizárt olyan vizsgálatokat, ahol az imaging eszköznek disease activity komponense is volt — holott ezek MAYBE-ként kellettek volna</span>
+                    </div>
+                </div>
+            </div>
+            <aside class="notes">
+                Két gyökérokot azonosítottunk. Claude sycophancy: a konszenzus prompt kifejezetten bátorította az engedést, és Claude ezt szó szerint vette — 152 esetben változtatott. A második gyökérok: OpenAI túl szigorúan húzta meg a diagnosztikus/klasszifikációs határt.
+            </aside>
+        </section>
+
+        <!-- ==================== LESSONS LEARNED: FIXES ==================== -->
+        <section id="consensus-fixes" data-chapter="lessons">
+            <h2>Javítások</h2>
+            <p style="color: var(--text-secondary);">A promptok átírása a két gyökérok alapján</p>
+            <div class="card-grid cols-2" style="margin-top: 20px;">
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--include);">
+                    <div style="font-size: 1.1em; font-weight: 700; color: var(--include); margin-bottom: 10px;">Anti-sycophancy konszenzus prompt</div>
+                    <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.7;">
+                        4 kritikus elv:<br>
+                        <span style="color: var(--accent);">&#9654;</span> Defend your rules-based reasoning<br>
+                        <span style="color: var(--accent);">&#9654;</span> Asymmetric change threshold<br>
+                        <span style="color: var(--accent);">&#9654;</span> Do not seek agreement<br>
+                        <span style="color: var(--accent);">&#9654;</span> Evaluate, don't defer
+                    </div>
+                </div>
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--include);">
+                    <div style="font-size: 1.1em; font-weight: 700; color: var(--include); margin-bottom: 10px;">R1 prompt pontosítás</div>
+                    <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.7;">
+                        3 helyen módosítva:<br>
+                        <span style="color: var(--accent);">&#9654;</span> Kizárási kritérium: diagnosztikus <em>vs.</em> disease activity<br>
+                        <span style="color: var(--accent);">&#9654;</span> EX2 minta kiegészítés<br>
+                        <span style="color: var(--accent);">&#9654;</span> Új IN4 rescue pattern: imaging + DA komponens
+                    </div>
+                </div>
+            </div>
+            <div class="callout fragment fade-up" style="margin-top: 24px;">
+                <p style="color: var(--text-primary);">
+                    A dual-screener megközelítés <strong>működik</strong> &mdash; de a prompt tervezés kritikus. Az LLM-ek közötti konszenzus aktív védelmet igényel a sycophancy és a túlzott szigor ellen.
+                </p>
+            </div>
+            <aside class="notes">
+                A javítások: anti-sycophancy konszenzus prompt 4 kritikus elvvel, és R1 prompt pontosítás 3 helyen. A tanulság: a dual-screener megközelítés értékes, de a prompt tervezés kritikus.
             </aside>
         </section>
 
@@ -1947,7 +2489,7 @@
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const chapter = link.getAttribute('data-chapter');
-            const slideEl = document.querySelector(`[data-chapter="${chapter}"]`);
+            const slideEl = document.querySelector(`.slides section[data-chapter="${chapter}"]`);
             if (slideEl) {
                 const indices = Reveal.getIndices(slideEl);
                 Reveal.slide(indices.h, indices.v);
