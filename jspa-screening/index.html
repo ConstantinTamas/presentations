@@ -525,6 +525,7 @@
         <li><a href="#/ai" data-chapter="ai">AI döntéshozó</a></li>
         <li><a href="#/quality" data-chapter="quality">Minőségbiztosítás</a></li>
         <li><a href="#/output" data-chapter="output">Eredmények</a></li>
+        <li><a href="#/agreement" data-chapter="agreement">Egyezés</a></li>
         <li><a href="#/prisma" data-chapter="prisma">PRISMA Flow</a></li>
         <li><a href="#/summary" data-chapter="summary">Konklúzió</a></li>
     </ul>
@@ -543,10 +544,10 @@
                 ERA/JSpA betegségaktivitás-értékelő eszközök
             </h3>
             <p style="margin-top: 2em; font-size: 1em; color: var(--text-muted);">
-                Automatizált title/abstract screening mesterséges intelligenciával
+                Automatizált title/abstract screening kettős AI screenerrel
             </p>
             <aside class="notes">
-                Ez a prezentáció bemutatja, hogyan alkalmaztuk a mesterséges intelligenciát a szisztematikus review screening folyamatában. A rendszer a PubMed és Embase találatokat dolgozza fel, és minden egyes cikkről döntést hoz: beválogatja, kizárja, vagy jelöli manuális ellenőrzésre.
+                Ez a prezentáció bemutatja, hogyan alkalmaztuk a mesterséges intelligenciát a szisztematikus review screening folyamatában. A rendszer két független AI modellel — Claude Opus 4.6 és OpenAI o3 — dolgozza fel a PubMed és Embase találatokat, és minden egyes cikkről mindkét screener egymástól függetlenül döntést hoz: beválogatja, kizárja, vagy jelöli manuális ellenőrzésre. A kettős screening Cohen's kappa egyezés-elemzéssel támasztja alá a döntések megbízhatóságát.
             </aside>
         </section>
 
@@ -615,33 +616,47 @@
         <section id="overview" data-chapter="overview">
             <h2>A megoldás: hibrid screening</h2>
             <p style="font-size: 1.1em; color: var(--text-primary); margin-bottom: 0.3em;">
-                Az eredeti terv: két független elemzés, amelyek egymást ellenőrzik.
+                Három független komponens, amelyek egymást kiegészítik és ellenőrzik.
             </p>
-            <div class="two-col" style="margin-top: 16px;">
+            <div class="card-grid cols-3" style="margin-top: 16px;">
                 <div class="card fragment fade-up" style="border-left: 4px solid var(--accent); border-radius: 4px 16px 16px 4px;">
-                    <div style="font-size: 1.3em; font-weight: 700; color: var(--accent); margin-bottom: 10px;">
-                        AI döntéshozó
+                    <div style="font-size: 1.2em; font-weight: 700; color: var(--accent); margin-bottom: 10px;">
+                        Claude screener
                     </div>
-                    <div class="label" style="text-align: left; line-height: 1.8; font-size: 1em;">
-                        Elolvassa a címet és az absztraktot, majd az inklúziós/exklúziós kritériumok alapján <strong style="color: var(--text-primary);">döntést hoz</strong>: beválogatás, kizárás, vagy manuális ellenőrzés.
+                    <div class="label" style="text-align: left; line-height: 1.8; font-size: 0.95em;">
+                        Anthropic <strong style="color: var(--text-primary);">Claude Opus 4.6</strong><br>
+                        Batch + sequential mód<br>
+                        50% batch megtakarítás
+                    </div>
+                </div>
+                <div class="card fragment fade-up" style="border-left: 4px solid var(--include); border-radius: 4px 16px 16px 4px;">
+                    <div style="font-size: 1.2em; font-weight: 700; color: var(--include); margin-bottom: 10px;">
+                        OpenAI screener
+                    </div>
+                    <div class="label" style="text-align: left; line-height: 1.8; font-size: 0.95em;">
+                        OpenAI <strong style="color: var(--text-primary);">o3</strong><br>
+                        Sequential mód<br>
+                        Chat Completions API
                     </div>
                 </div>
                 <div class="card fragment fade-up" style="border-left: 4px solid #ffa726; border-radius: 4px 16px 16px 4px;">
-                    <div style="font-size: 1.3em; font-weight: 700; color: #ffa726; margin-bottom: 10px;">
+                    <div style="font-size: 1.2em; font-weight: 700; color: #ffa726; margin-bottom: 10px;">
                         Kulcsszó-jelölő rendszer
                     </div>
-                    <div class="label" style="text-align: left; line-height: 1.8; font-size: 1em;">
-                        Automatikusan megjelöli a releváns kifejezéseket (pl. ERA, JSpADA, validáció), és <strong style="color: var(--text-primary);">szó szerinti idézeteket</strong> gyűjt az ellenőrizhetőség érdekében.
+                    <div class="label" style="text-align: left; line-height: 1.8; font-size: 0.95em;">
+                        Automatikus jelölés<br>
+                        <strong style="color: var(--text-primary);">Szó szerinti idézetek</strong><br>
+                        Reviewer tájékoztatás
                     </div>
                 </div>
             </div>
             <div class="callout fragment fade-up" style="margin-top: 16px;">
                 <p style="color: var(--text-primary);">
-                    Az előzetes tesztelés során kiderült: amikor a két rendszer eltérő véleményre jutott, <strong style="color: var(--accent);">az LLM döntése mindig helyesnek bizonyult.</strong> Ezért az LLM-et az auditálás tapasztalataival tovább finomítottuk, a kulcsszó-jelölést pedig megtartottuk — <strong>nem döntéshozóként, hanem a humán reviewer tájékoztatására.</strong>
+                    A két AI screener egymástól <strong style="color: var(--accent);">függetlenül, azonos rendszer-prompt</strong> alapján dönt. A <strong style="color: var(--accent);">Cohen's kappa</strong> mérőszám számszerűsíti az egyezést. A kulcsszó-jelölés nem döntéshozó, hanem a humán reviewer tájékoztatására szolgál.
                 </p>
             </div>
             <aside class="notes">
-                Eredetileg két független döntéshozó rendszert terveztünk: az AI és a kulcsszó-alapú rendszer egymástól függetlenül értékeltek volna, és az eltéréseket manuálisan vizsgáltuk volna felül. Az előzetes tesztelés és auditálás során azonban kiderült, hogy amikor a két rendszer konfliktusba került, az LLM értékelése mindig pontosabb volt. Ennek oka, hogy az LLM képes a szöveg kontextusát és a komplex inklúziós kritériumokat együttesen mérlegelni, míg a kulcsszó-rendszer csak a kifejezések jelenlétét detektálja. Ezért az LLM prompt-ját az auditálás során szerzett tapasztalatokkal iteratívan finomítottuk, a kulcsszó-jelölést pedig megtartottuk — de már nem döntéshozóként, hanem a humán reviewer számára hasznos kiegészítő információként az Excel táblában.
+                A rendszer három független komponensre épül. Két AI screener — Claude Opus 4.6 és OpenAI o3 — egymástól függetlenül, azonos rendszer-prompt alapján értékelik a cikkeket. A Cohen's kappa egyezés-elemzés számszerűsíti a két modell közötti megbízhatóságot. A kulcsszó-jelölő rendszer ezektől függetlenül működik: nem dönt, hanem a humán reviewer számára hasznos kiegészítő információkat gyűjt az Excel táblába — betegség-specifikus kifejezések, eszközök, validációs fogalmak és szó szerinti idézetek formájában.
             </aside>
         </section>
 
@@ -666,11 +681,16 @@
                 </div>
                 <div class="pipeline-step fragment fade-up" style="border-left-color: var(--accent);">
                     <div class="step-num">4. lépés</div>
-                    <div class="step-title">AI screening</div>
-                    <div class="step-desc">Mesterséges intelligencia értékeli minden cikk relevanciáját</div>
+                    <div class="step-title">Dual AI screening</div>
+                    <div class="step-desc">Két független AI screener (Claude + OpenAI) értékeli minden cikk relevanciáját</div>
+                </div>
+                <div class="pipeline-step fragment fade-up" style="border-left-color: #ffa726;">
+                    <div class="step-num">5. lépés</div>
+                    <div class="step-title">Egyezés-elemzés</div>
+                    <div class="step-desc">Cohen's kappa, konfúziós mátrix és eltérő döntések listázása</div>
                 </div>
                 <div class="pipeline-step fragment fade-up" style="border-left-color: var(--include);">
-                    <div class="step-num">5. lépés</div>
+                    <div class="step-num">6. lépés</div>
                     <div class="step-title">Excel kimenet</div>
                     <div class="step-desc">Áttekinthető táblázat döntésekkel, indoklással és PRISMA adatokkal</div>
                 </div>
@@ -679,7 +699,7 @@
                 A 3. és 4. lépés egymástól <strong style="color: var(--text-primary);">független</strong> — a kulcsszó-jelölés nem befolyásolja az AI döntését.
             </p>
             <aside class="notes">
-                A feldolgozás öt lépésben történik. Először beolvassuk a PubMed és Embase keresési találatokat. Aztán kiszűrjük a duplikátumokat — a két adatbázis között gyakori az átfedés. A harmadik és negyedik lépés párhuzamosan, de egymástól függetlenül működik: a kulcsszó-jelölés és az AI screening. Végül az Excel kimenet mindent összefog egy áttekinthető táblázatba.
+                A feldolgozás hat lépésben történik. Először beolvassuk a PubMed és Embase keresési találatokat. Aztán kiszűrjük a duplikátumokat — a két adatbázis között gyakori az átfedés. A harmadik lépés a kulcsszó-jelölés, a negyedik a dual AI screening, ahol Claude és OpenAI egymástól függetlenül értékelik a cikkeket. Az ötödik lépés az egyezés-elemzés: Cohen's kappa, konfúziós mátrix, eltérő döntések listázása. Végül az Excel kimenet mindent összefog egy áttekinthető táblázatba.
             </aside>
         </section>
 
@@ -792,8 +812,7 @@
         <section id="ai" data-chapter="ai">
             <h2>Hogyan dönt az AI?</h2>
             <p style="font-size: 1.1em; color: var(--text-secondary);">
-                A <span class="accent">Claude Opus 4.6</span> nyelvi modell (temperature&nbsp;=&nbsp;0) minden cikk címét és absztraktját
-                egyenként megvizsgálja, részletes inklúziós/exklúziós kritériumok alapján.
+                Két független AI modell — <span class="accent">Claude Opus 4.6</span> és <span style="color: var(--include);">OpenAI o3</span> — azonos rendszer-prompt alapján, egymástól függetlenül értékeli minden cikk címét és absztraktját.
             </p>
             <div class="decision-grid" style="margin-top: 24px;">
                 <div class="decision-box include fragment fade-up">
@@ -916,34 +935,34 @@
             <div class="two-col" style="margin-top: 16px;">
                 <div class="card fragment fade-up" style="border-top: 3px solid var(--accent);">
                     <div style="font-size: 1.3em; font-weight: 700; color: var(--accent); margin-bottom: 12px;">
-                        Sequential mód
+                        Claude screener
                     </div>
                     <div class="label" style="line-height: 1.8; font-size: 0.95em;">
-                        Cikkek egyenként feldolgozva<br>
-                        Anthropic Messages API<br>
-                        Real-time kimenet, azonnal látható<br>
-                        <span style="color: var(--text-muted);">~3-6 perc / 100 cikk</span>
+                        Sequential + <strong style="color: var(--text-primary);">Batch</strong> mód<br>
+                        Anthropic API<br>
+                        <strong style="color: var(--text-primary);">50% batch megtakarítás</strong><br>
+                        <span style="color: var(--text-muted);">Batch: aszinkron, ~15-30 perc</span>
                     </div>
                 </div>
                 <div class="card fragment fade-up" style="border-top: 3px solid var(--include);">
                     <div style="font-size: 1.3em; font-weight: 700; color: var(--include); margin-bottom: 12px;">
-                        Batch mód (alapértelmezett)
+                        OpenAI screener
                     </div>
                     <div class="label" style="line-height: 1.8; font-size: 0.95em;">
-                        Összes cikk egyszerre beküldve<br>
-                        Anthropic Batch API<br>
-                        <strong style="color: var(--text-primary);">50% költségmegtakarítás</strong><br>
-                        <span style="color: var(--text-muted);">Aszinkron, ~15-30 perc</span>
+                        Sequential mód<br>
+                        OpenAI Chat Completions API<br>
+                        <strong style="color: var(--text-primary);">response_format: json_object</strong><br>
+                        <span style="color: var(--text-muted);">~3-6 perc / 100 cikk</span>
                     </div>
                 </div>
             </div>
             <div class="callout fragment fade-up">
                 <p style="color: var(--text-primary);">
-                    Mindkét mód támogatja a <strong>resume</strong> funkciót: ha a futás megszakad, a <span style="color: var(--accent);">screening_progress.json</span> fájlból folytatható — a már kész eredmények nem vesznek el.
+                    Mindkét screener külön progress fájlt ment (<span style="color: var(--accent);">screening_progress_claude.json</span>, <span style="color: var(--include);">screening_progress_openai.json</span>), így bármelyik külön is újraindítható.
                 </p>
             </div>
             <aside class="notes">
-                Két feldolgozási mód érhető el. Sequential módban a cikkeket egyenként dolgozzuk fel a Messages API-n keresztül — ez lassabb, de azonnal látható az eredmény. A batch mód az alapértelmezett: az összes cikket egyszerre küldjük be a Batch API-n, ami 50% költségmegtakarítást jelent. Mindkét mód támogatja a resume funkciót — ha a futás bármilyen okból megszakad, a korábban kész eredmények nem vesznek el, és a feldolgozás folytatható.
+                A két screener különböző feldolgozási módokat támogat. A Claude screener elérhető sequential és batch módban is — a batch mód 50% költségmegtakarítást jelent az Anthropic Batch API-n keresztül. Az OpenAI screener sequential módban működik a Chat Completions API-val, response_format: json_object beállítással. Mindkét screener saját progress fájlt ment: screening_progress_claude.json és screening_progress_openai.json. Ha bármelyik futás megszakad, külön-külön is újraindítható — a korábban kész eredmények nem vesznek el.
             </aside>
         </section>
 
@@ -1117,36 +1136,43 @@
         <section id="output" data-chapter="output">
             <h2>Az Excel kimenet</h2>
             <p style="font-size: 1.05em; color: var(--text-secondary); margin-bottom: 0.2em;">
-                Az eredmények egy áttekinthető Excel fájlba kerülnek, 4 munkalappal:
+                Az eredmények egy áttekinthető Excel fájlba kerülnek, 5 munkalappal:
             </p>
             <div class="sheet-tabs fragment fade-up">
                 <div class="sheet-tab active">Screening</div>
                 <div class="sheet-tab">Summary</div>
+                <div class="sheet-tab" style="background: rgba(102,187,106,0.15); color: var(--include); border-color: rgba(102,187,106,0.3);">Agreement</div>
                 <div class="sheet-tab">Method</div>
                 <div class="sheet-tab">PRISMA Flow</div>
             </div>
             <div class="sheet-content fragment fade-up">
                 <div style="font-size: 1em; color: var(--text-secondary); line-height: 1.7;">
                     <strong style="color: var(--accent);">Screening munkalap:</strong>
-                    szín-kódolt döntések
-                    (<span style="color: var(--include); font-weight: 700;">zöld</span> = INCLUDE,
-                    <span style="color: var(--maybe); font-weight: 700;">sárga</span> = MAYBE,
-                    <span style="color: var(--exclude); font-weight: 700;">piros</span> = EXCLUDE),
+                    mindkét screener döntése, konfidenciája, indoklása + egyezés oszlop
+                    (<span style="color: var(--include); font-weight: 700;">Igen</span> /
+                    <span style="color: var(--maybe); font-weight: 700;">Részleges</span> /
+                    <span style="color: var(--exclude); font-weight: 700;">Nem</span>),
                     szűrhető fejlécek, kattintható DOI linkek.
                     <br>
                     <strong style="color: var(--accent);">Oszlopok:</strong>
-                    PMID, forrás, döntés, konfidencia, év, szerző, cím, folyóirat, DOI, indoklás, jelölések, manuális jegyzet
+                    PMID, forrás, Claude döntés, Claude konfidencia, Claude indoklás, OpenAI döntés, OpenAI konfidencia, OpenAI indoklás, egyezés, év, szerző, cím, folyóirat, DOI, jelölések, manuális jegyzet
                 </div>
             </div>
-            <div class="card-grid cols-4 fragment fade-up" style="margin-top: 16px;">
+            <div class="card-grid cols-3 fragment fade-up" style="margin-top: 16px;">
                 <div class="card" style="padding: 18px;">
                     <div class="value" style="font-size: 1.1em;">Screening</div>
-                    <div class="label" style="font-size: 0.85em;">Döntések + indoklás + jelölések</div>
+                    <div class="label" style="font-size: 0.85em;">Mindkét screener döntése + egyezés</div>
                 </div>
                 <div class="card" style="padding: 18px;">
                     <div class="value" style="font-size: 1.1em;">Summary</div>
                     <div class="label" style="font-size: 0.85em;">Összesítés, év szerinti bontás</div>
                 </div>
+                <div class="card" style="padding: 18px; border: 1px solid rgba(102,187,106,0.3);">
+                    <div class="value" style="font-size: 1.1em; color: var(--include);">Agreement</div>
+                    <div class="label" style="font-size: 0.85em;">Egyezés-elemzés, Cohen's kappa, konfúziós mátrix</div>
+                </div>
+            </div>
+            <div class="card-grid cols-2 fragment fade-up" style="margin-top: 8px;">
                 <div class="card" style="padding: 18px;">
                     <div class="value" style="font-size: 1.1em;">Method</div>
                     <div class="label" style="font-size: 0.85em;">Módszertan dokumentáció</div>
@@ -1157,7 +1183,7 @@
                 </div>
             </div>
             <aside class="notes">
-                Az eredmények egy Excel fájlba kerülnek, négy munkalappal. A Screening lap tartalmazza a fő táblázatot: minden cikk egy sor, szín-kódolt döntéssel, indoklással, jelölésekkel, és kattintható DOI linkekkel. A reviewer itt tud manuális jegyzeteket is hozzáadni dropdown menüből: Confirmed INCLUDE, Confirmed EXCLUDE, Need full text, Reclassify. A Summary lap összesíti az eredményeket. A Method lap dokumentálja a módszertant. A PRISMA Flow lap tartalmazza a PRISMA diagram adatait.
+                Az eredmények egy Excel fájlba kerülnek, öt munkalappal. A Screening lap tartalmazza a fő táblázatot: minden cikk egy sor, mindkét screener döntésével, konfidenciájával és indoklásával, plusz egy egyezés oszloppal (Igen/Részleges/Nem). A reviewer itt tud manuális jegyzeteket is hozzáadni. A Summary lap összesíti az eredményeket. Az Agreement lap tartalmazza az egyezés-elemzést: Cohen's kappa, konfúziós mátrix, és az eltérő döntések listáját. A Method lap dokumentálja a módszertant. A PRISMA Flow lap tartalmazza a PRISMA diagram adatait.
             </aside>
         </section>
 
@@ -1198,6 +1224,74 @@
             </aside>
         </section>
 
+        <!-- ==================== AGREEMENT ANALYSIS ==================== -->
+        <section id="agreement" data-chapter="agreement">
+            <h2>Inter-rater agreement</h2>
+            <p style="font-size: 1.05em; color: var(--text-secondary); margin-bottom: 0.3em;">
+                A két AI screener egyezését a <span class="accent">Cohen's kappa</span> statisztikával mérjük — ez a véletlen egyezésen túli megbízhatóságot számszerűsíti.
+            </p>
+            <div class="two-col" style="margin-top: 16px;">
+                <div class="fragment fade-up">
+                    <p style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 12px; text-align: center;">Konfúziós mátrix</p>
+                    <div style="display: grid; grid-template-columns: auto 1fr 1fr 1fr; grid-template-rows: auto 1fr 1fr 1fr; gap: 4px; font-size: 0.85em; text-align: center;">
+                        <div></div>
+                        <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 8px 6px; color: var(--accent); font-weight: 700; font-size: 0.85em;">OpenAI<br>INCLUDE</div>
+                        <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 8px 6px; color: var(--maybe); font-weight: 700; font-size: 0.85em;">OpenAI<br>MAYBE</div>
+                        <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 8px 6px; color: var(--exclude); font-weight: 700; font-size: 0.85em;">OpenAI<br>EXCLUDE</div>
+                        <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 8px 6px; color: var(--accent); font-weight: 700; font-size: 0.85em; writing-mode: horizontal-tb;">Claude<br>INCLUDE</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 12px; color: var(--include); font-weight: 800; font-size: 1.2em;">&#10003;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 8px 6px; color: var(--maybe); font-weight: 700; font-size: 0.85em;">Claude<br>MAYBE</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 12px; color: var(--include); font-weight: 800; font-size: 1.2em;">&#10003;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 8px 6px; color: var(--exclude); font-weight: 700; font-size: 0.85em;">Claude<br>EXCLUDE</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 12px; color: var(--include); font-weight: 800; font-size: 1.2em;">&#10003;</div>
+                    </div>
+                </div>
+                <div class="fragment fade-up">
+                    <p style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 12px;">Kappa értelmezés</p>
+                    <div class="rule-list" style="margin-top: 0; gap: 6px;">
+                        <div class="rule-item" style="padding: 8px 14px;">
+                            <div class="rule-id" style="color: var(--exclude); min-width: 80px; font-size: 0.9em;">&lt; 0.00</div>
+                            <div class="rule-text" style="font-size: 0.88em;">Poor (gyenge)</div>
+                        </div>
+                        <div class="rule-item" style="padding: 8px 14px;">
+                            <div class="rule-id" style="color: var(--exclude); min-width: 80px; font-size: 0.9em;">0.00 - 0.20</div>
+                            <div class="rule-text" style="font-size: 0.88em;">Slight (enyhe)</div>
+                        </div>
+                        <div class="rule-item" style="padding: 8px 14px;">
+                            <div class="rule-id" style="color: var(--maybe); min-width: 80px; font-size: 0.9em;">0.21 - 0.40</div>
+                            <div class="rule-text" style="font-size: 0.88em;">Fair (megfelelő)</div>
+                        </div>
+                        <div class="rule-item" style="padding: 8px 14px;">
+                            <div class="rule-id" style="color: var(--maybe); min-width: 80px; font-size: 0.9em;">0.41 - 0.60</div>
+                            <div class="rule-text" style="font-size: 0.88em;">Moderate (közepes)</div>
+                        </div>
+                        <div class="rule-item" style="padding: 8px 14px;">
+                            <div class="rule-id" style="color: var(--include); min-width: 80px; font-size: 0.9em;">0.61 - 0.80</div>
+                            <div class="rule-text" style="font-size: 0.88em;">Substantial (jelentős)</div>
+                        </div>
+                        <div class="rule-item" style="padding: 8px 14px;">
+                            <div class="rule-id" style="color: var(--include); min-width: 80px; font-size: 0.9em;">0.81 - 1.00</div>
+                            <div class="rule-text" style="font-size: 0.88em;">Almost perfect (csaknem tökéletes)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="callout fragment fade-up" style="margin-top: 16px;">
+                <p style="color: var(--text-primary);">
+                    Az eltérő döntésű cikkek listázva vannak <strong>mindkét screener indoklásával</strong> — a reviewer célzottan tudja felülvizsgálni a vitás eseteket.
+                </p>
+            </div>
+            <aside class="notes">
+                A Cohen's kappa statisztika az inter-rater agreement standard mérőszáma. Az egyszerű százalékos egyezéssel szemben a kappa kiküszöböli a véletlen egyezés hatását. A konfúziós mátrix a 3x3-as döntési tér eloszlását mutatja: Claude sorok, OpenAI oszlopok, INCLUDE / MAYBE / EXCLUDE kategóriákkal. A kappa értelmezési skálán a 0.61 feletti érték már "substantial" egyezést jelent. Az Excel Agreement munkalapján a kappa érték mellett a konfúziós mátrix és az eltérő döntésű cikkek listája is megjelenik — mindkét screener indoklásával együtt. Így a reviewer célzottan tudja felülvizsgálni azokat a cikkeket, ahol a két modell eltérő véleményre jutott.
+            </aside>
+        </section>
+
         <!-- ==================== PRISMA FLOW ==================== -->
         <section id="prisma" data-chapter="prisma">
             <h2>PRISMA Flow Diagram</h2>
@@ -1219,7 +1313,7 @@
                 <div class="flow-arrow fragment fade-up" style="padding: 1px 0; font-size: 1.2em;">↓</div>
                 <div class="flow-step fragment fade-up" style="border-color: var(--accent); min-width: 520px; padding: 10px 24px;">
                     <strong style="color: var(--accent);">Title/Abstract Screening</strong><br>
-                    <span style="font-size: 0.85em;">Claude Opus 4.6 · temperature = 0 · <strong style="color: var(--text-primary);">1316</strong> cikk értékelve</span>
+                    <span style="font-size: 0.85em;">Claude Opus 4.6 + OpenAI o3 · dual screening · <strong style="color: var(--text-primary);">1316</strong> cikk értékelve</span>
                 </div>
                 <div class="flow-arrow fragment fade-up" style="padding: 1px 0; font-size: 1.2em;">↓</div>
                 <div style="display: flex; align-items: flex-start; gap: 18px; justify-content: center;" class="fragment fade-up">
@@ -1255,7 +1349,7 @@
                 <div class="card fragment fade-up" style="border-top: 3px solid #7e57c2;">
                     <div class="icon">💻</div>
                     <div class="value" style="font-size: 1.3em; color: #b39ddb;">~2 munkanap</div>
-                    <div class="label" style="margin-top: 8px;">A teljes rendszer fejlesztése<br><span style="color: var(--text-muted); font-size: 0.85em;">~1600 sor Python kód, iteratív<br>fejlesztés Claude Code-dal</span></div>
+                    <div class="label" style="margin-top: 8px;">A teljes rendszer fejlesztése<br><span style="color: var(--text-muted); font-size: 0.85em;">~2520 sor Python kód, iteratív<br>fejlesztés Claude Code-dal</span></div>
                 </div>
                 <div class="card fragment fade-up" style="border-top: 3px solid var(--accent);">
                     <div class="icon">⚡</div>
@@ -1311,8 +1405,15 @@
                     <div class="label" style="text-align: left; font-size: 0.95em;">Az AI segít, de a végső döntés a revieweré</div>
                 </div>
             </div>
+            <div class="card fragment fade-up" style="text-align: left; padding: 24px; margin-top: 16px; border: 1px solid rgba(102,187,106,0.3);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                    <span style="font-size: 1.5em;">🤝</span>
+                    <span style="font-size: 1.1em; font-weight: 700; color: var(--text-primary);">Kettős AI screening</span>
+                </div>
+                <div class="label" style="text-align: left; font-size: 0.95em;">Két független LLM, Cohen's kappa egyezés-elemzéssel</div>
+            </div>
             <aside class="notes">
-                Konklúzióként négy fő előnye van a rendszernek. Először, a konzisztens döntéshozás: ugyanazok a kritériumok, fáradtság nélkül. Másodszor, átlátható és auditálható: indoklás, idézet, belső ellenőrzés minden döntéshez. Harmadszor, konzervatív: kétség esetén MAYBE. Negyedszer, az emberi felülbírálat mindig adott.
+                Konklúzióként öt fő előnye van a rendszernek. Először, a konzisztens döntéshozás: ugyanazok a kritériumok, fáradtság nélkül. Másodszor, átlátható és auditálható: indoklás, idézet, belső ellenőrzés minden döntéshez. Harmadszor, konzervatív: kétség esetén MAYBE. Negyedszer, az emberi felülbírálat mindig adott. Ötödször, a kettős AI screening: két független LLM — Claude és OpenAI — egymástól függetlenül értékel, és a Cohen's kappa egyezés-elemzés számszerűsíti a megbízhatóságot.
             </aside>
         </section>
 
@@ -1323,8 +1424,8 @@
                 <div class="card fragment fade-up" style="text-align: left; padding: 22px;">
                     <div style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Implementáció</div>
                     <div class="label" style="text-align: left; font-size: 0.9em; line-height: 1.7;">
-                        Python, ~1600 sor, egyetlen fájl<br>
-                        Claude Opus 4.6 (Anthropic API)<br>
+                        Python, ~2520 sor, egyetlen fájl<br>
+                        Claude Opus 4.6 + OpenAI o3 (dual screening)<br>
                         rapidfuzz fuzzy matching (deduplikáció)<br>
                         openpyxl (Excel generálás)
                     </div>
@@ -1335,6 +1436,7 @@
                         6 anti-hallucináció szabály<br>
                         5 belső validációs ellenőrzés<br>
                         7 explicit EXCLUDE minta + 3 INCLUDE rescue<br>
+                        Cohen's kappa inter-rater agreement<br>
                         PRISMA-kompatibilis reporting
                     </div>
                 </div>
@@ -1351,14 +1453,14 @@
                     <div style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Reprodukálhatóság</div>
                     <div class="label" style="text-align: left; font-size: 0.9em; line-height: 1.7;">
                         Determinisztikus (temperature = 0)<br>
+                        Dual-screener: két független AI döntéshozó<br>
                         Resume támogatás (batch + sequential)<br>
-                        Batch API: 50% költségmegtakarítás<br>
                         Teljes módszertan dokumentálva
                     </div>
                 </div>
             </div>
             <aside class="notes">
-                A technikai összefoglalón végigmenve: az implementáció egyetlen Python fájl, mintegy 1600 sor kód. Az AI modell a Claude Opus 4.6, temperature nullával a determinisztikus kimenetért. A módszertani garanciák közé tartozik a 6 anti-hallucináció szabály, az 5 belső validációs ellenőrzés, és a részletes EXCLUDE/INCLUDE minták. Az auditálhatóságot a független kulcsszó-annotáció, a verbatim idézetek és a szöveges indoklás biztosítja. A reprodukálhatóságot a determinisztikus beállítás, a resume támogatás és a teljes dokumentáció garantálja.
+                A technikai összefoglalón végigmenve: az implementáció egyetlen Python fájl, mintegy 2520 sor kód. Két AI modell — Claude Opus 4.6 és OpenAI o3 — egymástól függetlenül screenelik a cikkeket, temperature nullával a determinisztikus kimenetért. A módszertani garanciák közé tartozik a 6 anti-hallucináció szabály, az 5 belső validációs ellenőrzés, a részletes EXCLUDE/INCLUDE minták és a Cohen's kappa inter-rater agreement. Az auditálhatóságot a független kulcsszó-annotáció, a verbatim idézetek és a szöveges indoklás biztosítja. A reprodukálhatóságot a determinisztikus beállítás, a két független AI döntéshozó, a resume támogatás és a teljes dokumentáció garantálja.
             </aside>
         </section>
 
