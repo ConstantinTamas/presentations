@@ -44,7 +44,7 @@
         .reveal .slides { text-align: left; }
         .reveal .slides section {
             background: linear-gradient(160deg, var(--bg-dark) 0%, #1a1a2e 100%);
-            padding: 5% 8% 4% 8%;
+            padding: 48px 8% 36px 8%;
             box-sizing: border-box;
             display: flex !important;
             flex-direction: column;
@@ -303,6 +303,262 @@
 
         @media print {
             #chapter-nav, #slide-counter, #menu-hint { display: none !important; }
+        }
+
+        /* ===== Desktop overflow fixes: per-slide compacting ===== */
+        /* Viewport: 1920x1080, margin 0.04 => usable ~1843x1037
+           Padding: 48px top, 36px bottom => ~953px content height */
+
+        /* --- Slide 5: A feldolgozas lepessei (6 pipeline steps in 3x2) --- */
+        section#overview-pipeline .pipeline-grid {
+            gap: 12px;
+            margin-top: 16px;
+        }
+        section#overview-pipeline .pipeline-step {
+            padding: 16px 18px;
+        }
+        section#overview-pipeline .pipeline-step .step-desc {
+            font-size: 0.82em;
+        }
+
+        /* --- Slide 7: Kulcsszo-jeloles (2 paragraphs + 6 cards in two 3-col grids) --- */
+        section#annotation .card-grid {
+            gap: 12px;
+            margin-top: 10px !important;
+        }
+        section#annotation .card {
+            padding: 14px 18px;
+        }
+        section#annotation .card .value {
+            font-size: 1em;
+            margin-bottom: 0;
+        }
+        section#annotation .card .label {
+            font-size: 0.78em;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+        section#annotation > p {
+            margin-bottom: 0.1em;
+        }
+        section#annotation h2 {
+            margin-bottom: 0.3em;
+        }
+
+        /* --- Slide 10: Az AI valaszanak strukturaja (JSON block + 6 rule items in two-col) --- */
+        section#ai-response-structure .two-col {
+            gap: 28px;
+            margin-top: 8px;
+        }
+        section#ai-response-structure .rule-list {
+            gap: 5px;
+        }
+        section#ai-response-structure .rule-item {
+            padding: 8px 14px;
+        }
+        section#ai-response-structure .rule-text {
+            font-size: 0.85em;
+        }
+
+        /* --- Slide 11: A valasz mezoi reszletesen (6 cards in 2x3 grid) --- */
+        section#ai-response-fields > div[style*="grid-template-columns"] {
+            gap: 12px !important;
+            margin-top: 10px !important;
+        }
+        section#ai-response-fields > div[style*="grid-template-columns"] > .fragment {
+            padding: 14px 18px !important;
+        }
+        section#ai-response-fields > div[style*="grid-template-columns"] > .fragment > div:first-child {
+            font-size: 0.9em !important;
+            margin-bottom: 5px !important;
+        }
+        section#ai-response-fields > div[style*="grid-template-columns"] > .fragment > div:last-child {
+            font-size: 0.75em !important;
+            line-height: 1.5 !important;
+        }
+
+        /* --- Slide 13: Felnott tanulmanyok kezelese (two-col, each with card + example-box) --- */
+        section#ai-adult-studies .two-col {
+            gap: 28px;
+            margin-top: 10px;
+        }
+        section#ai-adult-studies .card {
+            padding: 18px 22px;
+        }
+        section#ai-adult-studies .card .label {
+            font-size: 0.88em;
+        }
+        section#ai-adult-studies .example-box {
+            padding: 14px 18px;
+            margin-top: 8px;
+        }
+        section#ai-adult-studies .example-box .ex-content {
+            font-size: 0.85em;
+            line-height: 1.55;
+        }
+
+        /* --- Slide 14: Hogyan kerulj el a hibakat? (h2 + p + 6 rule items) --- */
+        section#quality .rule-list {
+            gap: 5px;
+            margin-top: 8px;
+        }
+        section#quality .rule-item {
+            padding: 9px 16px;
+        }
+        section#quality .rule-text {
+            font-size: 0.85em;
+        }
+        section#quality > p {
+            margin-bottom: 0.1em;
+        }
+        section#quality h2 {
+            margin-bottom: 0.3em;
+        }
+
+        /* --- Slide 15: Belso konzisztencia-ellenorzes (h2 + p + 5 rules + trailing p) --- */
+        section#quality-validation .rule-list {
+            gap: 5px;
+            margin-top: 8px;
+        }
+        section#quality-validation .rule-item {
+            padding: 9px 16px;
+        }
+        section#quality-validation .rule-text {
+            font-size: 0.85em;
+        }
+        section#quality-validation > p {
+            margin-bottom: 0.1em;
+        }
+        section#quality-validation > p:last-of-type {
+            margin-top: 12px;
+        }
+
+        /* --- Slide 16: A dontesi logika (two-col with 3 + 5 rule items) --- */
+        section#quality-decision-logic .two-col {
+            gap: 28px;
+            margin-top: 10px;
+        }
+        section#quality-decision-logic .rule-list {
+            gap: 4px;
+        }
+        section#quality-decision-logic .rule-item {
+            padding: 8px 14px;
+        }
+        section#quality-decision-logic .rule-text {
+            font-size: 0.82em;
+        }
+
+        /* --- Slide 17: Az Excel kimenet (h2 + p + tabs + content + 3-col + 2-col cards) --- */
+        section#output > p {
+            margin-bottom: 0.05em;
+        }
+        section#output h2 {
+            margin-bottom: 0.3em;
+        }
+        section#output .sheet-tabs {
+            margin-top: 10px;
+        }
+        section#output .sheet-tab {
+            padding: 7px 16px;
+            font-size: 0.85em;
+        }
+        section#output .sheet-content {
+            padding: 12px 16px;
+        }
+        section#output .sheet-content div {
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+        section#output .card-grid {
+            margin-top: 8px !important;
+            gap: 10px;
+        }
+        section#output .card {
+            padding: 10px 14px !important;
+        }
+        section#output .card .value {
+            font-size: 0.95em;
+        }
+        section#output .card .label {
+            font-size: 0.75em;
+        }
+
+        /* --- Slide 19: Inter-rater agreement (confusion matrix + 6 kappa items + callout) --- */
+        section#agreement > p {
+            margin-bottom: 0.1em;
+        }
+        section#agreement h2 {
+            margin-bottom: 0.3em;
+        }
+        section#agreement .two-col {
+            gap: 24px;
+            margin-top: 8px;
+        }
+        section#agreement .rule-list {
+            gap: 3px;
+        }
+        section#agreement .rule-item {
+            padding: 5px 12px;
+        }
+        section#agreement .rule-id {
+            font-size: 0.8em;
+            min-width: 65px;
+        }
+        section#agreement .rule-text {
+            font-size: 0.8em;
+        }
+        section#agreement .callout {
+            margin-top: 8px;
+            padding: 8px 16px;
+        }
+        section#agreement .callout p {
+            font-size: 0.88em !important;
+        }
+
+        /* --- Slide 20: PRISMA Flow Diagram (flowchart + result boxes + trailing p) --- */
+        section#prisma .flowchart {
+            margin-top: 2px !important;
+        }
+        section#prisma .flow-step {
+            padding: 7px 20px !important;
+            font-size: 0.95em;
+        }
+        section#prisma .flow-arrow {
+            padding: 0 !important;
+            font-size: 1em;
+            line-height: 1;
+        }
+        section#prisma > p:last-of-type {
+            margin-top: 6px;
+        }
+
+        /* --- Slide 22: Konkluzio (4 cards in 2x2 + 1 standalone card) --- */
+        section#summary .card-grid {
+            gap: 12px;
+            margin-top: 8px !important;
+        }
+        section#summary .card-grid .card {
+            padding: 14px 18px !important;
+        }
+        section#summary > .card {
+            padding: 14px 18px !important;
+            margin-top: 8px !important;
+        }
+        section#summary .label {
+            font-size: 0.88em;
+        }
+
+        /* --- Slide 23: Technikai osszefoglalo (4 cards in 2x2 grid) --- */
+        section#summary-tech .card-grid {
+            gap: 12px;
+            margin-top: 8px !important;
+        }
+        section#summary-tech .card {
+            padding: 16px 18px !important;
+        }
+        section#summary-tech .card .label {
+            font-size: 0.82em;
+            line-height: 1.55;
         }
 
         /* ===== Mobile-responsive overrides ===== */
@@ -587,7 +843,7 @@
             </aside>
         </section>
 
-        <section data-chapter="problem">
+        <section id="problem-question" data-chapter="problem">
             <h2>A kutatási kérdés</h2>
             <p style="font-size: 1.25em; color: var(--text-primary); max-width: 90%; line-height: 1.5;">
                 Milyen <span class="accent">validált eszközök</span> léteznek a juvenilis spondyloarthritis (JSpA)
@@ -664,7 +920,7 @@
         </section>
 
         <!-- ==================== PIPELINE ==================== -->
-        <section data-chapter="overview">
+        <section id="overview-pipeline" data-chapter="overview">
             <h2>A feldolgozás lépései</h2>
             <div class="pipeline-grid">
                 <div class="pipeline-step" style="border-left-color: #7e57c2;">
@@ -744,38 +1000,38 @@
         <!-- ==================== ANNOTATION ==================== -->
         <section id="annotation" data-chapter="annotation">
             <h2>Kulcsszó-jelölés</h2>
-            <p style="font-size: 1.1em; color: var(--text-primary); margin-bottom: 0.3em;">
+            <p style="font-size: 1em; color: var(--text-primary); margin-bottom: 0.1em;">
                 A rendszer automatikusan keres releváns kifejezéseket a cím és absztrakt szövegében, és <span class="accent">szó szerinti idézeteket</span> rögzít.
             </p>
-            <p style="font-size: 1em; color: var(--text-muted); margin-bottom: 0.4em;">
+            <p style="font-size: 0.92em; color: var(--text-muted); margin-bottom: 0.15em;">
                 Ez <strong style="color: var(--exclude);">nem dönt</strong> — kizárólag a reviewer munkáját segíti az Excelben.
             </p>
-            <div class="card-grid cols-3" style="margin-top: 16px;">
-                <div class="card fragment fade-up" style="border-top: 3px solid var(--accent);">
-                    <div class="value" style="font-size: 1.2em;">Betegség-specifikus</div>
-                    <div class="label" style="margin-top: 6px;">ERA, JSpA, enthesitis, spondyloarthritis, sacroiliitis</div>
+            <div class="card-grid cols-3" style="margin-top: 10px; gap: 12px;">
+                <div class="card fragment fade-up" style="border-top: 3px solid var(--accent); padding: 14px 18px;">
+                    <div class="value" style="font-size: 1em;">Betegség-specifikus</div>
+                    <div class="label" style="margin-top: 4px; font-size: 0.78em; line-height: 1.4;">ERA, JSpA, enthesitis, spondyloarthritis, sacroiliitis</div>
                 </div>
-                <div class="card fragment fade-up" style="border-top: 3px solid var(--include);">
-                    <div class="value" style="font-size: 1.2em; color: var(--include);">Eszközök</div>
-                    <div class="label" style="margin-top: 6px;">JSpADA, ASDAS, JADAS, BASDAI, SPARCC, CHAQ</div>
+                <div class="card fragment fade-up" style="border-top: 3px solid var(--include); padding: 14px 18px;">
+                    <div class="value" style="font-size: 1em; color: var(--include);">Eszközök</div>
+                    <div class="label" style="margin-top: 4px; font-size: 0.78em; line-height: 1.4;">JSpADA, ASDAS, JADAS, BASDAI, SPARCC, CHAQ</div>
                 </div>
-                <div class="card fragment fade-up" style="border-top: 3px solid #ffa726;">
-                    <div class="value" style="font-size: 1.2em; color: #ffa726;">Validáció</div>
-                    <div class="label" style="margin-top: 6px;">validity, reliability, responsiveness, psychometric, MCID</div>
+                <div class="card fragment fade-up" style="border-top: 3px solid #ffa726; padding: 14px 18px;">
+                    <div class="value" style="font-size: 1em; color: #ffa726;">Validáció</div>
+                    <div class="label" style="margin-top: 4px; font-size: 0.78em; line-height: 1.4;">validity, reliability, responsiveness, psychometric, MCID</div>
                 </div>
             </div>
-            <div class="card-grid cols-3" style="margin-top: 8px;">
-                <div class="card fragment fade-up" style="border-top: 3px solid #7e57c2;">
-                    <div class="value" style="font-size: 1.2em; color: #b39ddb;">Képalkotás</div>
-                    <div class="label" style="margin-top: 6px;">MRI, ultrahang, whole-body MRI, power Doppler</div>
+            <div class="card-grid cols-3" style="margin-top: 8px; gap: 12px;">
+                <div class="card fragment fade-up" style="border-top: 3px solid #7e57c2; padding: 14px 18px;">
+                    <div class="value" style="font-size: 1em; color: #b39ddb;">Képalkotás</div>
+                    <div class="label" style="margin-top: 4px; font-size: 0.78em; line-height: 1.4;">MRI, ultrahang, whole-body MRI, power Doppler</div>
                 </div>
-                <div class="card fragment fade-up" style="border-top: 3px solid var(--text-muted);">
-                    <div class="value" style="font-size: 1.2em; color: var(--text-muted);">Biomarkerek</div>
-                    <div class="label" style="margin-top: 6px;">CRP, ESR, calprotectin<br>(csak bevett markerek)</div>
+                <div class="card fragment fade-up" style="border-top: 3px solid var(--text-muted); padding: 14px 18px;">
+                    <div class="value" style="font-size: 1em; color: var(--text-muted);">Biomarkerek</div>
+                    <div class="label" style="margin-top: 4px; font-size: 0.78em; line-height: 1.4;">CRP, ESR, calprotectin<br>(csak bevett markerek)</div>
                 </div>
-                <div class="card fragment fade-up" style="border-top: 3px solid var(--exclude);">
-                    <div class="value" style="font-size: 1.2em; color: var(--exclude);">Figyelmeztető</div>
-                    <div class="label" style="margin-top: 6px;">novel biomarker, machine learning, feasibility, pilot study</div>
+                <div class="card fragment fade-up" style="border-top: 3px solid var(--exclude); padding: 14px 18px;">
+                    <div class="value" style="font-size: 1em; color: var(--exclude);">Figyelmeztető</div>
+                    <div class="label" style="margin-top: 4px; font-size: 0.78em; line-height: 1.4;">novel biomarker, machine learning, feasibility, pilot study</div>
                 </div>
             </div>
             <aside class="notes">
@@ -783,7 +1039,7 @@
             </aside>
         </section>
 
-        <section data-chapter="annotation">
+        <section id="annotation-excel" data-chapter="annotation">
             <h2>Mit jelent ez az Excelben?</h2>
             <p style="font-size: 1.1em; color: var(--text-secondary); margin-bottom: 0.3em;">
                 Minden cikkhez jelölések ("flag"-ek) és szó szerinti idézetek kerülnek.
@@ -839,11 +1095,11 @@
             </aside>
         </section>
 
-        <section data-chapter="ai">
+        <section id="ai-response-structure" data-chapter="ai">
             <h2>Az AI válaszának struktúrája</h2>
-            <div class="two-col" style="margin-top: 12px;">
+            <div class="two-col" style="margin-top: 8px; gap: 28px;">
                 <div>
-                    <div style="background: rgba(0,0,0,0.4); border-radius: 12px; padding: 20px 24px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.78em; color: var(--text-secondary); line-height: 1.8; border: 1px solid rgba(255,255,255,0.08);">
+                    <div style="background: rgba(0,0,0,0.4); border-radius: 12px; padding: 16px 20px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.75em; color: var(--text-secondary); line-height: 1.7; border: 1px solid rgba(255,255,255,0.08);">
                         {<br>
                         &nbsp;&nbsp;<span style="color: var(--accent);">"decision"</span>: <span style="color: #ce93d8;">"INCLUDE"</span>,<br>
                         &nbsp;&nbsp;<span style="color: var(--accent);">"confidence"</span>: <span style="color: #ffd740;">4</span>,<br>
@@ -855,24 +1111,24 @@
                     </div>
                 </div>
                 <div>
-                    <div class="rule-list" style="margin-top: 0; gap: 8px;">
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;"><strong style="color: var(--accent);">decision</strong> — INCLUDE / MAYBE / EXCLUDE</div>
+                    <div class="rule-list" style="margin-top: 0; gap: 5px;">
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.85em;"><strong style="color: var(--accent);">decision</strong> — INCLUDE / MAYBE / EXCLUDE</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;"><strong style="color: var(--accent);">confidence</strong> — 1-5 skálán jelölt bizonyosság</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.85em;"><strong style="color: var(--accent);">confidence</strong> — 1-5 skálán jelölt bizonyosság</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;"><strong style="color: var(--accent);">reason</strong> — 1-3 mondatos, szövegre hivatkozó indoklás</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.85em;"><strong style="color: var(--accent);">reason</strong> — 1-3 mondatos, szövegre hivatkozó indoklás</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;"><strong style="color: var(--accent);">key_quote</strong> — verbatim idézet az absztraktból</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.85em;"><strong style="color: var(--accent);">key_quote</strong> — verbatim idézet az absztraktból</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;"><strong style="color: var(--accent);">adult_extrapolable</strong> — felnőtt eszközvalidáció jelölése</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.85em;"><strong style="color: var(--accent);">adult_extrapolable</strong> — felnőtt eszközvalidáció jelölése</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;"><strong style="color: var(--accent);">validation_check</strong> — belső konzisztencia-ellenőrzés</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.85em;"><strong style="color: var(--accent);">validation_check</strong> — belső konzisztencia-ellenőrzés</div>
                         </div>
                     </div>
                 </div>
@@ -883,46 +1139,46 @@
         </section>
 
         <!-- AI Response Fields Detail -->
-        <section data-chapter="ai">
+        <section id="ai-response-fields" data-chapter="ai">
             <h2>A válasz mezői részletesen</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px;">
-                <div class="fragment fade-right" style="background: rgba(102, 187, 106, 0.08); border-left: 4px solid var(--include); border-radius: 12px; padding: 20px 24px;">
-                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 1.05em; font-weight: 700; color: var(--include); margin-bottom: 10px;">decision</div>
-                    <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.7;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+                <div class="fragment fade-right" style="background: rgba(102, 187, 106, 0.08); border-left: 4px solid var(--include); border-radius: 12px; padding: 14px 18px;">
+                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92em; font-weight: 700; color: var(--include); margin-bottom: 5px;">decision</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); line-height: 1.55;">
                         <span style="color: var(--include); font-weight: 600;">INCLUDE</span> — beválogatva full-text review-ra<br>
                         <span style="color: var(--maybe); font-weight: 600;">MAYBE</span> — emberi felülvizsgálat szükséges<br>
                         <span style="color: var(--exclude); font-weight: 600;">EXCLUDE</span> — kizárva, indoklással
                     </div>
                 </div>
-                <div class="fragment fade-left" style="background: rgba(255, 215, 64, 0.08); border-left: 4px solid #ffd740; border-radius: 12px; padding: 20px 24px;">
-                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 1.05em; font-weight: 700; color: #ffd740; margin-bottom: 10px;">confidence</div>
-                    <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.7;">
+                <div class="fragment fade-left" style="background: rgba(255, 215, 64, 0.08); border-left: 4px solid #ffd740; border-radius: 12px; padding: 14px 18px;">
+                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92em; font-weight: 700; color: #ffd740; margin-bottom: 5px;">confidence</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); line-height: 1.55;">
                         <strong style="color: var(--text-primary);">1</strong> — nagyon bizonytalan<br>
                         <strong style="color: var(--text-primary);">3</strong> — közepes bizonyosság<br>
                         <strong style="color: var(--text-primary);">5</strong> — egyértelmű döntés
                     </div>
                 </div>
-                <div class="fragment fade-right" style="background: rgba(206, 147, 216, 0.08); border-left: 4px solid #ce93d8; border-radius: 12px; padding: 20px 24px;">
-                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 1.05em; font-weight: 700; color: #ce93d8; margin-bottom: 10px;">reason</div>
-                    <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.7;">
+                <div class="fragment fade-right" style="background: rgba(206, 147, 216, 0.08); border-left: 4px solid #ce93d8; border-radius: 12px; padding: 14px 18px;">
+                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92em; font-weight: 700; color: #ce93d8; margin-bottom: 5px;">reason</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); line-height: 1.55;">
                         1-3 mondatos szöveges indoklás, amely konkrétan hivatkozik a cím vagy absztrakt tartalmára — nem általánosság
                     </div>
                 </div>
-                <div class="fragment fade-left" style="background: rgba(79, 195, 247, 0.08); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 24px;">
-                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 1.05em; font-weight: 700; color: var(--accent); margin-bottom: 10px;">key_quote</div>
-                    <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.7;">
+                <div class="fragment fade-left" style="background: rgba(79, 195, 247, 0.08); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 18px;">
+                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 5px;">key_quote</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); line-height: 1.55;">
                         Szó szerinti idézet az absztraktból — nem parafrázis, nem összevont részlet, hanem <em style="color: var(--accent);">verbatim</em> másolat
                     </div>
                 </div>
-                <div class="fragment fade-right" style="background: rgba(255, 138, 101, 0.08); border-left: 4px solid #ff8a65; border-radius: 12px; padding: 20px 24px;">
-                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 1.05em; font-weight: 700; color: #ff8a65; margin-bottom: 10px;">adult_extrapolable</div>
-                    <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.7;">
+                <div class="fragment fade-right" style="background: rgba(255, 138, 101, 0.08); border-left: 4px solid #ff8a65; border-radius: 12px; padding: 14px 18px;">
+                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92em; font-weight: 700; color: #ff8a65; margin-bottom: 5px;">adult_extrapolable</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); line-height: 1.55;">
                         Felnőtt vizsgálat, amely validált eszközt használ — kizárt, de jelöljük mint potenciálisan extrapolálható eredmény
                     </div>
                 </div>
-                <div class="fragment fade-left" style="background: rgba(129, 199, 132, 0.08); border-left: 4px solid #81c784; border-radius: 12px; padding: 20px 24px;">
-                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 1.05em; font-weight: 700; color: #81c784; margin-bottom: 10px;">validation_check</div>
-                    <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.7;">
+                <div class="fragment fade-left" style="background: rgba(129, 199, 132, 0.08); border-left: 4px solid #81c784; border-radius: 12px; padding: 14px 18px;">
+                    <div style="font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.92em; font-weight: 700; color: #81c784; margin-bottom: 5px;">validation_check</div>
+                    <div style="font-size: 0.75em; color: var(--text-secondary); line-height: 1.55;">
                         Belső konzisztencia-ellenőrzés: az AI visszaellenőrzi saját döntését 5 validációs szabály alapján (V1-V5)
                     </div>
                 </div>
@@ -933,7 +1189,7 @@
         </section>
 
         <!-- Sequential vs Batch -->
-        <section data-chapter="ai">
+        <section id="ai-processing-modes" data-chapter="ai">
             <h2>Feldolgozási módok</h2>
             <div class="two-col" style="margin-top: 16px;">
                 <div class="card fragment fade-up" style="border-top: 3px solid var(--accent);">
@@ -970,7 +1226,7 @@
         </section>
 
         <!-- ==================== ADULT EXTRAPOLABLE ==================== -->
-        <section data-chapter="ai">
+        <section id="ai-adult-studies" data-chapter="ai">
             <h2>Felnőtt tanulmányok kezelése</h2>
             <p style="font-size: 1.1em; color: var(--text-secondary); margin-bottom: 0.3em;">
                 A keresés gyermekekre irányult, de felnőtt tanulmányok is bekerülhetnek a találatok közé.
@@ -1021,7 +1277,7 @@
         <!-- ==================== QUALITY ==================== -->
         <section id="quality" data-chapter="quality">
             <h2>Hogyan kerüljük el a hibákat?</h2>
-            <p style="font-size: 1.1em; color: var(--text-secondary); margin-bottom: 0.3em;">
+            <p style="font-size: 1em; color: var(--text-secondary); margin-bottom: 0.1em;">
                 Az AI nyelvi modellek ismert kockázata a "hallucináció" — azaz nem létező információk generálása.
                 A rendszer hat szabállyal védekezik ez ellen.
             </p>
@@ -1056,9 +1312,9 @@
             </aside>
         </section>
 
-        <section data-chapter="quality">
+        <section id="quality-validation" data-chapter="quality">
             <h2>Belső konzisztencia-ellenőrzés</h2>
-            <p style="font-size: 1.05em; color: var(--text-secondary); margin-bottom: 0.3em;">
+            <p style="font-size: 0.95em; color: var(--text-secondary); margin-bottom: 0.1em;">
                 Minden döntésnél az AI automatikusan ellenőrzi a saját logikáját:
             </p>
             <div class="rule-list">
@@ -1083,7 +1339,7 @@
                     <div class="rule-text"><strong style="color: var(--accent);">INCLUDE</strong> esetén: az eszköz bevett klinikai gyakorlat, nem kísérleti módszer?</div>
                 </div>
             </div>
-            <p class="fragment fade-up" style="margin-top: 18px; color: var(--text-muted); font-size: 0.95em;">
+            <p class="fragment fade-up" style="margin-top: 10px; color: var(--text-muted); font-size: 0.88em;">
                 Ha bármely ellenőrzés nem teljesül → a döntés automatikusan <span class="tag orange" style="margin: 0; font-size: 0.85em;">MAYBE</span> lesz, manuális felülvizsgálatra jelölve.
             </p>
             <aside class="notes">
@@ -1092,40 +1348,40 @@
         </section>
 
         <!-- ==================== INCLUDE / EXCLUDE PATTERNS ==================== -->
-        <section data-chapter="quality">
+        <section id="quality-decision-logic" data-chapter="quality">
             <h2>A döntési logika főbb szabályai</h2>
-            <div class="two-col" style="margin-top: 16px;">
+            <div class="two-col" style="margin-top: 10px; gap: 28px;">
                 <div>
-                    <p style="font-size: 1.1em; font-weight: 700; color: var(--include); margin-bottom: 12px;">Beválogatás (INCLUDE)</p>
-                    <div class="rule-list" style="margin-top: 0;">
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Gyermekkori ERA/JSpA + betegségaktivitás-eszköz validáció</div>
+                    <p style="font-size: 1em; font-weight: 700; color: var(--include); margin-bottom: 8px;">Beválogatás (INCLUDE)</p>
+                    <div class="rule-list" style="margin-top: 0; gap: 4px;">
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Gyermekkori ERA/JSpA + betegségaktivitás-eszköz validáció</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Általános JIA kohorsz + eszköz/validáció → MAYBE (ERA alcsoport léte bizonytalan)</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Általános JIA kohorsz + eszköz/validáció → MAYBE (ERA alcsoport léte bizonytalan)</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Review, ha eredeti adatszintézist is tartalmazhat</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Review, ha eredeti adatszintézist is tartalmazhat</div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <p style="font-size: 1.1em; font-weight: 700; color: var(--exclude); margin-bottom: 12px;">Kizárás (EXCLUDE)</p>
-                    <div class="rule-list" style="margin-top: 0;">
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Kezelési vizsgálat, ahol az eszköz csak másodlagos végpont</div>
+                    <p style="font-size: 1em; font-weight: 700; color: var(--exclude); margin-bottom: 8px;">Kizárás (EXCLUDE)</p>
+                    <div class="rule-list" style="margin-top: 0; gap: 4px;">
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Kezelési vizsgálat, ahol az eszköz csak másodlagos végpont</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Pilot, feasibility, proof-of-concept vizsgálatok</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Pilot, feasibility, proof-of-concept vizsgálatok</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Novel biomarkerek (miRNA, proteomika) — még nem bevett</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Novel biomarkerek (miRNA, proteomika) — még nem bevett</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">JAMAR fordítás ERA-specifikus adat nélkül</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">JAMAR fordítás ERA-specifikus adat nélkül</div>
                         </div>
-                        <div class="rule-item fragment fade-up" style="padding: 10px 16px;">
-                            <div class="rule-text" style="font-size: 0.9em;">Más betegség: uveitis, IBD, szisztémás JIA</div>
+                        <div class="rule-item fragment fade-up" style="padding: 8px 14px;">
+                            <div class="rule-text" style="font-size: 0.82em;">Más betegség: uveitis, IBD, szisztémás JIA</div>
                         </div>
                     </div>
                 </div>
@@ -1138,18 +1394,18 @@
         <!-- ==================== OUTPUT ==================== -->
         <section id="output" data-chapter="output">
             <h2>Az Excel kimenet</h2>
-            <p style="font-size: 1.05em; color: var(--text-secondary); margin-bottom: 0.2em;">
+            <p style="font-size: 0.95em; color: var(--text-secondary); margin-bottom: 0.1em;">
                 Az eredmények egy áttekinthető Excel fájlba kerülnek, 5 munkalappal:
             </p>
-            <div class="sheet-tabs fragment fade-up">
-                <div class="sheet-tab active">Screening</div>
-                <div class="sheet-tab">Summary</div>
-                <div class="sheet-tab" style="background: rgba(102,187,106,0.15); color: var(--include); border-color: rgba(102,187,106,0.3);">Agreement</div>
-                <div class="sheet-tab">Method</div>
-                <div class="sheet-tab">PRISMA Flow</div>
+            <div class="sheet-tabs fragment fade-up" style="margin-top: 10px;">
+                <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">Screening</div>
+                <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">Summary</div>
+                <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em; background: rgba(102,187,106,0.15); color: var(--include); border-color: rgba(102,187,106,0.3);">Agreement</div>
+                <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">Method</div>
+                <div class="sheet-tab" style="padding: 7px 16px; font-size: 0.85em;">PRISMA Flow</div>
             </div>
-            <div class="sheet-content fragment fade-up">
-                <div style="font-size: 1em; color: var(--text-secondary); line-height: 1.7;">
+            <div class="sheet-content fragment fade-up" style="padding: 12px 16px;">
+                <div style="font-size: 0.85em; color: var(--text-secondary); line-height: 1.5;">
                     <strong style="color: var(--accent);">Screening munkalap:</strong>
                     mindkét screener döntése, konfidenciája, indoklása + egyezés oszlop
                     (<span style="color: var(--include); font-weight: 700;">Igen</span> /
@@ -1161,28 +1417,28 @@
                     PMID, forrás, Claude döntés, Claude konfidencia, Claude indoklás, OpenAI döntés, OpenAI konfidencia, OpenAI indoklás, egyezés, év, szerző, cím, folyóirat, DOI, jelölések, manuális jegyzet
                 </div>
             </div>
-            <div class="card-grid cols-3 fragment fade-up" style="margin-top: 16px;">
-                <div class="card" style="padding: 18px;">
-                    <div class="value" style="font-size: 1.1em;">Screening</div>
-                    <div class="label" style="font-size: 0.85em;">Mindkét screener döntése + egyezés</div>
+            <div class="card-grid cols-3 fragment fade-up" style="margin-top: 8px; gap: 10px;">
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="value" style="font-size: 0.95em;">Screening</div>
+                    <div class="label" style="font-size: 0.75em;">Mindkét screener döntése + egyezés</div>
                 </div>
-                <div class="card" style="padding: 18px;">
-                    <div class="value" style="font-size: 1.1em;">Summary</div>
-                    <div class="label" style="font-size: 0.85em;">Összesítés, év szerinti bontás</div>
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="value" style="font-size: 0.95em;">Summary</div>
+                    <div class="label" style="font-size: 0.75em;">Összesítés, év szerinti bontás</div>
                 </div>
-                <div class="card" style="padding: 18px; border: 1px solid rgba(102,187,106,0.3);">
-                    <div class="value" style="font-size: 1.1em; color: var(--include);">Agreement</div>
-                    <div class="label" style="font-size: 0.85em;">Egyezés-elemzés, Cohen's kappa, konfúziós mátrix</div>
+                <div class="card" style="padding: 10px 14px; border: 1px solid rgba(102,187,106,0.3);">
+                    <div class="value" style="font-size: 0.95em; color: var(--include);">Agreement</div>
+                    <div class="label" style="font-size: 0.75em;">Egyezés-elemzés, Cohen's kappa, konfúziós mátrix</div>
                 </div>
             </div>
-            <div class="card-grid cols-2 fragment fade-up" style="margin-top: 8px;">
-                <div class="card" style="padding: 18px;">
-                    <div class="value" style="font-size: 1.1em;">Method</div>
-                    <div class="label" style="font-size: 0.85em;">Módszertan dokumentáció</div>
+            <div class="card-grid cols-2 fragment fade-up" style="margin-top: 6px; gap: 10px;">
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="value" style="font-size: 0.95em;">Method</div>
+                    <div class="label" style="font-size: 0.75em;">Módszertan dokumentáció</div>
                 </div>
-                <div class="card" style="padding: 18px;">
-                    <div class="value" style="font-size: 1.1em;">PRISMA</div>
-                    <div class="label" style="font-size: 0.85em;">Flow diagram adatok</div>
+                <div class="card" style="padding: 10px 14px;">
+                    <div class="value" style="font-size: 0.95em;">PRISMA</div>
+                    <div class="label" style="font-size: 0.75em;">Flow diagram adatok</div>
                 </div>
             </div>
             <aside class="notes">
@@ -1190,7 +1446,7 @@
             </aside>
         </section>
 
-        <section data-chapter="output">
+        <section id="output-manual" data-chapter="output">
             <h2>Manuális felülbírálat</h2>
             <p style="font-size: 1.1em; color: var(--text-secondary);">
                 Az AI döntése <span class="accent">kiindulópont</span>, nem végső szó.
@@ -1230,63 +1486,63 @@
         <!-- ==================== AGREEMENT ANALYSIS ==================== -->
         <section id="agreement" data-chapter="agreement">
             <h2>Inter-rater agreement</h2>
-            <p style="font-size: 1.05em; color: var(--text-secondary); margin-bottom: 0.3em;">
+            <p style="font-size: 0.95em; color: var(--text-secondary); margin-bottom: 0.1em;">
                 A két AI screener egyezését a <span class="accent">Cohen's kappa</span> statisztikával mérjük — ez a véletlen egyezésen túli megbízhatóságot számszerűsíti.
             </p>
-            <div class="two-col" style="margin-top: 16px;">
+            <div class="two-col" style="margin-top: 8px; gap: 24px;">
                 <div class="fragment fade-up">
-                    <p style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 12px; text-align: center;">Konfúziós mátrix</p>
-                    <div style="display: grid; grid-template-columns: auto 1fr 1fr 1fr; grid-template-rows: auto 1fr 1fr 1fr; gap: 4px; font-size: 0.85em; text-align: center;">
+                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 8px; text-align: center;">Konfúziós mátrix</p>
+                    <div style="display: grid; grid-template-columns: auto 1fr 1fr 1fr; grid-template-rows: auto 1fr 1fr 1fr; gap: 3px; font-size: 0.8em; text-align: center;">
                         <div></div>
-                        <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 8px 6px; color: var(--accent); font-weight: 700; font-size: 0.85em;">OpenAI<br>INCLUDE</div>
-                        <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 8px 6px; color: var(--maybe); font-weight: 700; font-size: 0.85em;">OpenAI<br>MAYBE</div>
-                        <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 8px 6px; color: var(--exclude); font-weight: 700; font-size: 0.85em;">OpenAI<br>EXCLUDE</div>
-                        <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 8px 6px; color: var(--accent); font-weight: 700; font-size: 0.85em; writing-mode: horizontal-tb;">Claude<br>INCLUDE</div>
-                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 12px; color: var(--include); font-weight: 800; font-size: 1.2em;">&#10003;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 8px 6px; color: var(--maybe); font-weight: 700; font-size: 0.85em;">Claude<br>MAYBE</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 12px; color: var(--include); font-weight: 800; font-size: 1.2em;">&#10003;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 8px 6px; color: var(--exclude); font-weight: 700; font-size: 0.85em;">Claude<br>EXCLUDE</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: var(--bg-card); border-radius: 8px; padding: 12px; color: var(--text-muted);">&#8943;</div>
-                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 12px; color: var(--include); font-weight: 800; font-size: 1.2em;">&#10003;</div>
+                        <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 6px 4px; color: var(--accent); font-weight: 700; font-size: 0.82em;">OpenAI<br>INCLUDE</div>
+                        <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 6px 4px; color: var(--maybe); font-weight: 700; font-size: 0.82em;">OpenAI<br>MAYBE</div>
+                        <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 6px 4px; color: var(--exclude); font-weight: 700; font-size: 0.82em;">OpenAI<br>EXCLUDE</div>
+                        <div style="background: rgba(79,195,247,0.15); border-radius: 6px; padding: 6px 4px; color: var(--accent); font-weight: 700; font-size: 0.82em; writing-mode: horizontal-tb;">Claude<br>INCLUDE</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">&#10003;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(255,167,38,0.15); border-radius: 6px; padding: 6px 4px; color: var(--maybe); font-weight: 700; font-size: 0.82em;">Claude<br>MAYBE</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">&#10003;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(239,83,80,0.15); border-radius: 6px; padding: 6px 4px; color: var(--exclude); font-weight: 700; font-size: 0.82em;">Claude<br>EXCLUDE</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: var(--bg-card); border-radius: 8px; padding: 8px; color: var(--text-muted);">&#8943;</div>
+                        <div style="background: rgba(102,187,106,0.2); border-radius: 8px; padding: 8px; color: var(--include); font-weight: 800; font-size: 1.1em;">&#10003;</div>
                     </div>
                 </div>
                 <div class="fragment fade-up">
-                    <p style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 12px;">Kappa értelmezés</p>
-                    <div class="rule-list" style="margin-top: 0; gap: 6px;">
-                        <div class="rule-item" style="padding: 8px 14px;">
-                            <div class="rule-id" style="color: var(--exclude); min-width: 80px; font-size: 0.9em;">&lt; 0.00</div>
-                            <div class="rule-text" style="font-size: 0.88em;">Poor (gyenge)</div>
+                    <p style="font-size: 0.92em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Kappa értelmezés</p>
+                    <div class="rule-list" style="margin-top: 0; gap: 3px;">
+                        <div class="rule-item" style="padding: 5px 12px;">
+                            <div class="rule-id" style="color: var(--exclude); min-width: 65px; font-size: 0.8em;">&lt; 0.00</div>
+                            <div class="rule-text" style="font-size: 0.8em;">Poor (gyenge)</div>
                         </div>
-                        <div class="rule-item" style="padding: 8px 14px;">
-                            <div class="rule-id" style="color: var(--exclude); min-width: 80px; font-size: 0.9em;">0.00 - 0.20</div>
-                            <div class="rule-text" style="font-size: 0.88em;">Slight (enyhe)</div>
+                        <div class="rule-item" style="padding: 5px 12px;">
+                            <div class="rule-id" style="color: var(--exclude); min-width: 65px; font-size: 0.8em;">0.00 - 0.20</div>
+                            <div class="rule-text" style="font-size: 0.8em;">Slight (enyhe)</div>
                         </div>
-                        <div class="rule-item" style="padding: 8px 14px;">
-                            <div class="rule-id" style="color: var(--maybe); min-width: 80px; font-size: 0.9em;">0.21 - 0.40</div>
-                            <div class="rule-text" style="font-size: 0.88em;">Fair (megfelelő)</div>
+                        <div class="rule-item" style="padding: 5px 12px;">
+                            <div class="rule-id" style="color: var(--maybe); min-width: 65px; font-size: 0.8em;">0.21 - 0.40</div>
+                            <div class="rule-text" style="font-size: 0.8em;">Fair (megfelelő)</div>
                         </div>
-                        <div class="rule-item" style="padding: 8px 14px;">
-                            <div class="rule-id" style="color: var(--maybe); min-width: 80px; font-size: 0.9em;">0.41 - 0.60</div>
-                            <div class="rule-text" style="font-size: 0.88em;">Moderate (közepes)</div>
+                        <div class="rule-item" style="padding: 5px 12px;">
+                            <div class="rule-id" style="color: var(--maybe); min-width: 65px; font-size: 0.8em;">0.41 - 0.60</div>
+                            <div class="rule-text" style="font-size: 0.8em;">Moderate (közepes)</div>
                         </div>
-                        <div class="rule-item" style="padding: 8px 14px;">
-                            <div class="rule-id" style="color: var(--include); min-width: 80px; font-size: 0.9em;">0.61 - 0.80</div>
-                            <div class="rule-text" style="font-size: 0.88em;">Substantial (jelentős)</div>
+                        <div class="rule-item" style="padding: 5px 12px;">
+                            <div class="rule-id" style="color: var(--include); min-width: 65px; font-size: 0.8em;">0.61 - 0.80</div>
+                            <div class="rule-text" style="font-size: 0.8em;">Substantial (jelentős)</div>
                         </div>
-                        <div class="rule-item" style="padding: 8px 14px;">
-                            <div class="rule-id" style="color: var(--include); min-width: 80px; font-size: 0.9em;">0.81 - 1.00</div>
-                            <div class="rule-text" style="font-size: 0.88em;">Almost perfect (csaknem tökéletes)</div>
+                        <div class="rule-item" style="padding: 5px 12px;">
+                            <div class="rule-id" style="color: var(--include); min-width: 65px; font-size: 0.8em;">0.81 - 1.00</div>
+                            <div class="rule-text" style="font-size: 0.8em;">Almost perfect (csaknem tökéletes)</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="callout fragment fade-up" style="margin-top: 16px;">
-                <p style="color: var(--text-primary);">
+            <div class="callout fragment fade-up" style="margin-top: 8px; padding: 8px 16px;">
+                <p style="color: var(--text-primary); font-size: 0.88em;">
                     Az eltérő döntésű cikkek listázva vannak <strong>mindkét screener indoklásával</strong> — a reviewer célzottan tudja felülvizsgálni a vitás eseteket.
                 </p>
             </div>
@@ -1298,46 +1554,46 @@
         <!-- ==================== PRISMA FLOW ==================== -->
         <section id="prisma" data-chapter="prisma">
             <h2>PRISMA Flow Diagram</h2>
-            <div class="flowchart" style="margin-top: 4px;">
-                <div class="flow-step fragment fade-up" style="border-color: #7e57c2; min-width: 520px; padding: 10px 24px;">
+            <div class="flowchart" style="margin-top: 2px;">
+                <div class="flow-step fragment fade-up" style="border-color: #7e57c2; min-width: 520px; padding: 7px 20px;">
                     <strong style="color: #b39ddb;">Azonosítás</strong><br>
-                    <span style="font-size: 0.85em;">PubMed: <strong>626</strong> &nbsp;+&nbsp; Embase: <strong>1047</strong> &nbsp;=&nbsp; <strong style="color: var(--text-primary);">1673</strong> rekord</span>
+                    <span style="font-size: 0.82em;">PubMed: <strong>626</strong> &nbsp;+&nbsp; Embase: <strong>1047</strong> &nbsp;=&nbsp; <strong style="color: var(--text-primary);">1673</strong> rekord</span>
                 </div>
-                <div class="flow-arrow fragment fade-up" style="padding: 1px 0; font-size: 1.2em;">↓</div>
-                <div style="display: flex; align-items: center; gap: 20px;" class="fragment fade-up">
-                    <div class="flow-step" style="border-color: #5c6bc0; min-width: 360px; padding: 10px 24px;">
+                <div class="flow-arrow fragment fade-up" style="padding: 0; font-size: 1em; line-height: 1;">↓</div>
+                <div style="display: flex; align-items: center; gap: 18px;" class="fragment fade-up">
+                    <div class="flow-step" style="border-color: #5c6bc0; min-width: 360px; padding: 7px 20px;">
                         <strong style="color: #9fa8da;">Duplikátumszűrés</strong><br>
-                        <span style="font-size: 0.85em;">DOI → PMID → fuzzy matching</span>
+                        <span style="font-size: 0.82em;">DOI → PMID → fuzzy matching</span>
                     </div>
-                    <div style="font-size: 0.85em; color: var(--exclude); white-space: nowrap;">
+                    <div style="font-size: 0.82em; color: var(--exclude); white-space: nowrap;">
                         → <strong>357</strong> duplikátum eltávolítva
                     </div>
                 </div>
-                <div class="flow-arrow fragment fade-up" style="padding: 1px 0; font-size: 1.2em;">↓</div>
-                <div class="flow-step fragment fade-up" style="border-color: var(--accent); min-width: 520px; padding: 10px 24px;">
+                <div class="flow-arrow fragment fade-up" style="padding: 0; font-size: 1em; line-height: 1;">↓</div>
+                <div class="flow-step fragment fade-up" style="border-color: var(--accent); min-width: 520px; padding: 7px 20px;">
                     <strong style="color: var(--accent);">Title/Abstract Screening</strong><br>
-                    <span style="font-size: 0.85em;">Claude Opus 4.6 + OpenAI o3 · dual screening · <strong style="color: var(--text-primary);">1316</strong> cikk értékelve</span>
+                    <span style="font-size: 0.82em;">Claude Opus 4.6 + OpenAI o3 · dual screening · <strong style="color: var(--text-primary);">1316</strong> cikk értékelve</span>
                 </div>
-                <div class="flow-arrow fragment fade-up" style="padding: 1px 0; font-size: 1.2em;">↓</div>
-                <div style="display: flex; align-items: flex-start; gap: 18px; justify-content: center;" class="fragment fade-up">
-                    <div class="flow-step" style="border-color: var(--include); min-width: auto; padding: 10px 22px;">
+                <div class="flow-arrow fragment fade-up" style="padding: 0; font-size: 1em; line-height: 1;">↓</div>
+                <div style="display: flex; align-items: flex-start; gap: 16px; justify-content: center;" class="fragment fade-up">
+                    <div class="flow-step" style="border-color: var(--include); min-width: auto; padding: 8px 20px;">
                         <span style="color: var(--include); font-weight: 700;">INCLUDE</span><br>
-                        <span style="font-size: 1.1em; font-weight: 800; color: var(--include);">63</span><br>
-                        <span style="font-size: 0.8em; color: var(--text-muted);">→ full-text review</span>
+                        <span style="font-size: 1.05em; font-weight: 800; color: var(--include);">63</span><br>
+                        <span style="font-size: 0.75em; color: var(--text-muted);">→ full-text review</span>
                     </div>
-                    <div class="flow-step" style="border-color: var(--maybe); min-width: auto; padding: 10px 22px;">
+                    <div class="flow-step" style="border-color: var(--maybe); min-width: auto; padding: 8px 20px;">
                         <span style="color: var(--maybe); font-weight: 700;">MAYBE</span><br>
-                        <span style="font-size: 1.1em; font-weight: 800; color: var(--maybe);">145</span><br>
-                        <span style="font-size: 0.8em; color: var(--text-muted);">→ manuális felülvizsgálat</span>
+                        <span style="font-size: 1.05em; font-weight: 800; color: var(--maybe);">145</span><br>
+                        <span style="font-size: 0.75em; color: var(--text-muted);">→ manuális felülvizsgálat</span>
                     </div>
-                    <div class="flow-step" style="border-color: var(--exclude); min-width: auto; padding: 10px 22px;">
+                    <div class="flow-step" style="border-color: var(--exclude); min-width: auto; padding: 8px 20px;">
                         <span style="color: var(--exclude); font-weight: 700;">EXCLUDE</span><br>
-                        <span style="font-size: 1.1em; font-weight: 800; color: var(--exclude);">1108</span><br>
-                        <span style="font-size: 0.8em; color: var(--text-muted);">→ kizárva indoklással</span>
+                        <span style="font-size: 1.05em; font-weight: 800; color: var(--exclude);">1108</span><br>
+                        <span style="font-size: 0.75em; color: var(--text-muted);">→ kizárva indoklással</span>
                     </div>
                 </div>
             </div>
-            <p class="fragment fade-up" style="text-align: center; margin-top: 12px; color: var(--text-muted); font-size: 0.9em;">
+            <p class="fragment fade-up" style="text-align: center; margin-top: 6px; color: var(--text-muted); font-size: 0.88em;">
                 A reviewer <strong style="color: var(--text-primary);">208 cikket</strong> (INCLUDE + MAYBE) vizsgál tovább az <strong style="color: var(--text-primary);">1316</strong>-ból — <span class="accent">84%</span> munka megtakarítás.
             </p>
             <aside class="notes">
@@ -1346,7 +1602,7 @@
         </section>
 
         <!-- ==================== TIME COMPARISON ==================== -->
-        <section data-chapter="prisma">
+        <section id="prisma-cost" data-chapter="prisma">
             <h2>Idő és költség</h2>
             <div class="card-grid cols-3" style="margin-top: 16px;">
                 <div class="card fragment fade-up" style="border-top: 3px solid #7e57c2;">
@@ -1421,7 +1677,7 @@
         </section>
 
         <!-- Technical summary -->
-        <section data-chapter="summary">
+        <section id="summary-tech" data-chapter="summary">
             <h2>A rendszer technikai összefoglalója</h2>
             <div class="card-grid cols-2" style="margin-top: 12px;">
                 <div class="card fragment fade-up" style="text-align: left; padding: 22px;">
