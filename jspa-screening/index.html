@@ -309,40 +309,82 @@
         /* Viewport: 1920x1080, margin 0.04 => usable ~1843x1037
            Padding: 48px top, 36px bottom => ~953px content height */
 
+        /* --- Slide 4: A megoldas hibrid screening (3 cards + callout) --- */
+        section#overview {
+            padding-top: 36px !important;
+            padding-bottom: 28px !important;
+        }
+        section#overview .card-grid {
+            margin-top: 12px !important;
+        }
+        section#overview .card {
+            padding: 20px 22px !important;
+        }
+        section#overview .card .label {
+            line-height: 1.6 !important;
+            font-size: 0.88em !important;
+        }
+        section#overview .callout {
+            margin-top: 12px !important;
+            padding: 12px 18px !important;
+        }
+        section#overview .callout p {
+            font-size: 0.92em !important;
+            line-height: 1.5 !important;
+        }
+
         /* --- Slide 5: A feldolgozas lepessei (6 pipeline steps in 3x2) --- */
+        section#overview-pipeline {
+            padding-top: 32px !important;
+            padding-bottom: 20px !important;
+        }
         section#overview-pipeline .pipeline-grid {
-            gap: 12px;
-            margin-top: 16px;
+            gap: 10px !important;
+            margin-top: 10px !important;
         }
         section#overview-pipeline .pipeline-step {
-            padding: 16px 18px;
+            padding: 12px 16px !important;
+        }
+        section#overview-pipeline .pipeline-step .step-num {
+            font-size: 0.7em !important;
+            margin-bottom: 3px !important;
+        }
+        section#overview-pipeline .pipeline-step .step-title {
+            font-size: 1em !important;
+            margin-bottom: 3px !important;
         }
         section#overview-pipeline .pipeline-step .step-desc {
-            font-size: 0.82em;
+            font-size: 0.75em !important;
+            line-height: 1.4 !important;
         }
 
         /* --- Slide 7: Kulcsszo-jeloles (2 paragraphs + 6 cards in two 3-col grids) --- */
+        section#annotation {
+            padding-top: 36px !important;
+            padding-bottom: 28px !important;
+        }
         section#annotation .card-grid {
-            gap: 12px;
-            margin-top: 10px !important;
+            gap: 8px !important;
+            margin-top: 6px !important;
         }
         section#annotation .card {
-            padding: 14px 18px;
+            padding: 10px 14px !important;
         }
         section#annotation .card .value {
-            font-size: 1em;
+            font-size: 0.88em !important;
             margin-bottom: 0;
         }
         section#annotation .card .label {
-            font-size: 0.78em;
-            margin-top: 4px;
-            line-height: 1.4;
+            font-size: 0.72em !important;
+            margin-top: 2px !important;
+            line-height: 1.35 !important;
         }
         section#annotation > p {
-            margin-bottom: 0.1em;
+            margin-bottom: 0 !important;
+            font-size: 0.92em !important;
         }
         section#annotation h2 {
-            margin-bottom: 0.3em;
+            margin-bottom: 0.25em;
         }
 
         /* --- Slide 10: Az AI valaszanak strukturaja (JSON block + 6 rule items in two-col) --- */
@@ -361,40 +403,54 @@
         }
 
         /* --- Slide 11: A valasz mezoi reszletesen (6 cards in 2x3 grid) --- */
+        section#ai-response-fields {
+            padding-top: 36px !important;
+            padding-bottom: 28px !important;
+        }
         section#ai-response-fields > div[style*="grid-template-columns"] {
-            gap: 12px !important;
-            margin-top: 10px !important;
+            gap: 8px !important;
+            margin-top: 8px !important;
         }
         section#ai-response-fields > div[style*="grid-template-columns"] > .fragment {
-            padding: 14px 18px !important;
+            padding: 10px 14px !important;
         }
         section#ai-response-fields > div[style*="grid-template-columns"] > .fragment > div:first-child {
-            font-size: 0.9em !important;
-            margin-bottom: 5px !important;
+            font-size: 0.85em !important;
+            margin-bottom: 3px !important;
         }
         section#ai-response-fields > div[style*="grid-template-columns"] > .fragment > div:last-child {
-            font-size: 0.75em !important;
-            line-height: 1.5 !important;
+            font-size: 0.72em !important;
+            line-height: 1.45 !important;
+        }
+        section#ai-response-fields h2 {
+            margin-bottom: 0.2em;
         }
 
         /* --- Slide 13: Felnott tanulmanyok kezelese (two-col, each with card + example-box) --- */
+        section#ai-adult-studies {
+            padding-bottom: 28px !important;
+        }
         section#ai-adult-studies .two-col {
-            gap: 28px;
+            gap: 24px !important;
             margin-top: 10px;
         }
         section#ai-adult-studies .card {
-            padding: 18px 22px;
+            padding: 16px 20px !important;
+        }
+        section#ai-adult-studies .card > div:first-child {
+            margin-bottom: 6px !important;
         }
         section#ai-adult-studies .card .label {
             font-size: 0.88em;
+            line-height: 1.55 !important;
         }
         section#ai-adult-studies .example-box {
-            padding: 14px 18px;
-            margin-top: 8px;
+            padding: 12px 16px !important;
+            margin-top: 8px !important;
         }
         section#ai-adult-studies .example-box .ex-content {
             font-size: 0.85em;
-            line-height: 1.55;
+            line-height: 1.5 !important;
         }
 
         /* --- Slide 14: Hogyan kerulj el a hibakat? (h2 + p + 6 rule items) --- */
@@ -434,102 +490,154 @@
         }
 
         /* --- Slide 16: A dontesi logika (two-col with 3 + 5 rule items) --- */
+        section#quality-decision-logic {
+            padding-top: 36px !important;
+            padding-bottom: 28px !important;
+        }
         section#quality-decision-logic .two-col {
             gap: 28px;
             margin-top: 10px;
         }
         section#quality-decision-logic .rule-list {
-            gap: 4px;
+            gap: 5px !important;
         }
         section#quality-decision-logic .rule-item {
-            padding: 8px 14px;
+            padding: 9px 16px !important;
         }
         section#quality-decision-logic .rule-text {
-            font-size: 0.82em;
+            font-size: 0.85em !important;
         }
 
         /* --- Slide 17: Az Excel kimenet (h2 + p + tabs + content + 3-col + 2-col cards) --- */
         section#output > p {
-            margin-bottom: 0.05em;
+            margin-bottom: 0 !important;
         }
         section#output h2 {
-            margin-bottom: 0.3em;
+            margin-bottom: 0.25em;
         }
         section#output .sheet-tabs {
-            margin-top: 10px;
+            margin-top: 8px !important;
         }
         section#output .sheet-tab {
-            padding: 7px 16px;
-            font-size: 0.85em;
+            padding: 6px 14px !important;
+            font-size: 0.82em !important;
         }
         section#output .sheet-content {
-            padding: 12px 16px;
-        }
-        section#output .sheet-content div {
-            font-size: 0.88em;
-            line-height: 1.5;
-        }
-        section#output .card-grid {
-            margin-top: 8px !important;
-            gap: 10px;
-        }
-        section#output .card {
             padding: 10px 14px !important;
         }
+        section#output .sheet-content div {
+            font-size: 0.82em !important;
+            line-height: 1.45 !important;
+        }
+        section#output .card-grid {
+            margin-top: 6px !important;
+            gap: 8px !important;
+        }
+        section#output .card {
+            padding: 8px 12px !important;
+        }
         section#output .card .value {
-            font-size: 0.95em;
+            font-size: 0.9em !important;
         }
         section#output .card .label {
-            font-size: 0.75em;
+            font-size: 0.72em !important;
         }
 
         /* --- Slide 19: Inter-rater agreement (confusion matrix + 6 kappa items + callout) --- */
+        section#agreement {
+            padding-top: 36px !important;
+            padding-bottom: 24px !important;
+        }
         section#agreement > p {
             margin-bottom: 0.1em;
         }
         section#agreement h2 {
-            margin-bottom: 0.3em;
+            margin-bottom: 0.25em;
         }
         section#agreement .two-col {
             gap: 24px;
             margin-top: 8px;
         }
         section#agreement .rule-list {
-            gap: 3px;
+            gap: 4px !important;
         }
         section#agreement .rule-item {
-            padding: 5px 12px;
+            padding: 6px 14px !important;
         }
         section#agreement .rule-id {
-            font-size: 0.8em;
+            font-size: 0.82em !important;
             min-width: 65px;
         }
         section#agreement .rule-text {
-            font-size: 0.8em;
+            font-size: 0.82em !important;
         }
         section#agreement .callout {
             margin-top: 8px;
-            padding: 8px 16px;
+            padding: 10px 16px !important;
         }
         section#agreement .callout p {
-            font-size: 0.88em !important;
+            font-size: 0.9em !important;
         }
 
         /* --- Slide 20: PRISMA Flow Diagram (flowchart + result boxes + trailing p) --- */
+        section#prisma {
+            padding-top: 32px !important;
+            padding-bottom: 20px !important;
+        }
+        section#prisma h2 {
+            margin-bottom: 0.2em;
+        }
         section#prisma .flowchart {
-            margin-top: 2px !important;
+            margin-top: 0 !important;
         }
         section#prisma .flow-step {
-            padding: 7px 20px !important;
-            font-size: 0.95em;
+            padding: 5px 18px !important;
+            font-size: 0.88em !important;
         }
         section#prisma .flow-arrow {
             padding: 0 !important;
-            font-size: 1em;
+            font-size: 0.9em !important;
             line-height: 1;
         }
         section#prisma > p:last-of-type {
-            margin-top: 6px;
+            margin-top: 4px !important;
+            font-size: 0.82em !important;
+        }
+
+        /* --- Slide 21: Ido es koltseg (3 cards + callout) --- */
+        section#prisma-cost {
+            padding-top: 32px !important;
+            padding-bottom: 20px !important;
+        }
+        section#prisma-cost h2 {
+            margin-bottom: 0.25em;
+        }
+        section#prisma-cost .card-grid {
+            margin-top: 10px !important;
+            gap: 14px !important;
+        }
+        section#prisma-cost .card {
+            padding: 18px 20px !important;
+        }
+        section#prisma-cost .card .icon {
+            font-size: 1.8em !important;
+            margin-bottom: 6px !important;
+        }
+        section#prisma-cost .card .value {
+            font-size: 1.15em !important;
+        }
+        section#prisma-cost .card .label {
+            margin-top: 4px !important;
+            font-size: 0.82em !important;
+            line-height: 1.45 !important;
+        }
+        section#prisma-cost .callout {
+            margin-top: 14px !important;
+            padding: 12px 18px !important;
+        }
+        section#prisma-cost .callout p {
+            font-size: 0.92em !important;
+            line-height: 1.5 !important;
         }
 
         /* --- Slide 22: Konkluzio (4 cards in 2x2 + 1 standalone card) --- */
@@ -549,16 +657,27 @@
         }
 
         /* --- Slide 23: Technikai osszefoglalo (4 cards in 2x2 grid) --- */
+        section#summary-tech {
+            padding-top: 36px !important;
+            padding-bottom: 24px !important;
+        }
         section#summary-tech .card-grid {
-            gap: 12px;
-            margin-top: 8px !important;
+            gap: 8px !important;
+            margin-top: 6px !important;
         }
         section#summary-tech .card {
-            padding: 16px 18px !important;
+            padding: 12px 14px !important;
+        }
+        section#summary-tech .card > div:first-child {
+            font-size: 0.85em !important;
+            margin-bottom: 2px !important;
         }
         section#summary-tech .card .label {
-            font-size: 0.82em;
-            line-height: 1.55;
+            font-size: 0.75em !important;
+            line-height: 1.4 !important;
+        }
+        section#summary-tech h2 {
+            margin-bottom: 0.2em;
         }
 
         /* ===== Mobile-responsive overrides ===== */
@@ -1634,42 +1753,42 @@
         <!-- ==================== SUMMARY ==================== -->
         <section id="summary" data-chapter="summary">
             <h2>Konklúzió</h2>
-            <div class="card-grid cols-2" style="margin-top: 16px;">
-                <div class="card fragment fade-up" style="text-align: left; padding: 24px;">
-                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-                        <span style="font-size: 1.5em;">🎯</span>
-                        <span style="font-size: 1.1em; font-weight: 700; color: var(--text-primary);">Konzisztens döntéshozás</span>
+            <div class="card-grid cols-2" style="margin-top: 10px; gap: 10px;">
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                        <span style="font-size: 1.3em;">🎯</span>
+                        <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Konzisztens döntéshozás</span>
                     </div>
-                    <div class="label" style="text-align: left; font-size: 0.95em;">Ugyanazok a kritériumok minden cikkre, fáradtság nélkül</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em;">Ugyanazok a kritériumok minden cikkre, fáradtság nélkül</div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; padding: 24px;">
-                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-                        <span style="font-size: 1.5em;">🔍</span>
-                        <span style="font-size: 1.1em; font-weight: 700; color: var(--text-primary);">Átlátható és auditálható</span>
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                        <span style="font-size: 1.3em;">🔍</span>
+                        <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Átlátható és auditálható</span>
                     </div>
-                    <div class="label" style="text-align: left; font-size: 0.95em;">Indoklás, idézet, belső ellenőrzés minden döntéshez</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em;">Indoklás, idézet, belső ellenőrzés minden döntéshez</div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; padding: 24px;">
-                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-                        <span style="font-size: 1.5em;">🛡</span>
-                        <span style="font-size: 1.1em; font-weight: 700; color: var(--text-primary);">Konzervatív megközelítés</span>
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                        <span style="font-size: 1.3em;">🛡</span>
+                        <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Konzervatív megközelítés</span>
                     </div>
-                    <div class="label" style="text-align: left; font-size: 0.95em;">Kétség esetén MAYBE — inkább több, mint kevesebb</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em;">Kétség esetén MAYBE — inkább több, mint kevesebb</div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; padding: 24px;">
-                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-                        <span style="font-size: 1.5em;">👨‍⚕️</span>
-                        <span style="font-size: 1.1em; font-weight: 700; color: var(--text-primary);">Emberi felülbírálat</span>
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                        <span style="font-size: 1.3em;">👨‍⚕️</span>
+                        <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Emberi felülbírálat</span>
                     </div>
-                    <div class="label" style="text-align: left; font-size: 0.95em;">Az AI segít, de a végső döntés a revieweré</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em;">Az AI segít, de a végső döntés a revieweré</div>
                 </div>
             </div>
-            <div class="card fragment fade-up" style="text-align: left; padding: 24px; margin-top: 16px; border: 1px solid rgba(102,187,106,0.3);">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
-                    <span style="font-size: 1.5em;">🤝</span>
-                    <span style="font-size: 1.1em; font-weight: 700; color: var(--text-primary);">Kettős AI screening</span>
+            <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px; margin-top: 10px; border: 1px solid rgba(102,187,106,0.3);">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                    <span style="font-size: 1.3em;">🤝</span>
+                    <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Kettős AI screening</span>
                 </div>
-                <div class="label" style="text-align: left; font-size: 0.95em;">Két független LLM, Cohen's kappa egyezés-elemzéssel</div>
+                <div class="label" style="text-align: left; font-size: 0.85em;">Két független LLM, Cohen's kappa egyezés-elemzéssel</div>
             </div>
             <aside class="notes">
                 Konklúzióként öt fő előnye van a rendszernek. Először, a konzisztens döntéshozás: ugyanazok a kritériumok, fáradtság nélkül. Másodszor, átlátható és auditálható: indoklás, idézet, belső ellenőrzés minden döntéshez. Harmadszor, konzervatív: kétség esetén MAYBE. Negyedszer, az emberi felülbírálat mindig adott. Ötödször, a kettős AI screening: két független LLM — Claude és OpenAI — egymástól függetlenül értékel, és a Cohen's kappa egyezés-elemzés számszerűsíti a megbízhatóságot.
@@ -1679,19 +1798,19 @@
         <!-- Technical summary -->
         <section id="summary-tech" data-chapter="summary">
             <h2>A rendszer technikai összefoglalója</h2>
-            <div class="card-grid cols-2" style="margin-top: 12px;">
-                <div class="card fragment fade-up" style="text-align: left; padding: 22px;">
-                    <div style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Implementáció</div>
-                    <div class="label" style="text-align: left; font-size: 0.9em; line-height: 1.7;">
+            <div class="card-grid cols-2" style="margin-top: 8px; gap: 10px;">
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 16px;">
+                    <div style="font-size: 0.9em; font-weight: 700; color: var(--accent); margin-bottom: 4px;">Implementáció</div>
+                    <div class="label" style="text-align: left; font-size: 0.78em; line-height: 1.4;">
                         Python, ~2520 sor, egyetlen fájl<br>
                         Claude Opus 4.6 + OpenAI o3 (dual screening)<br>
                         rapidfuzz fuzzy matching (deduplikáció)<br>
                         openpyxl (Excel generálás)
                     </div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; padding: 22px;">
-                    <div style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Módszertani garanciák</div>
-                    <div class="label" style="text-align: left; font-size: 0.9em; line-height: 1.7;">
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 16px;">
+                    <div style="font-size: 0.9em; font-weight: 700; color: var(--accent); margin-bottom: 4px;">Módszertani garanciák</div>
+                    <div class="label" style="text-align: left; font-size: 0.78em; line-height: 1.4;">
                         6 anti-hallucináció szabály<br>
                         5 belső validációs ellenőrzés<br>
                         7 explicit EXCLUDE minta + 3 INCLUDE rescue<br>
@@ -1699,18 +1818,18 @@
                         PRISMA-kompatibilis reporting
                     </div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; padding: 22px;">
-                    <div style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Auditálhatóság</div>
-                    <div class="label" style="text-align: left; font-size: 0.9em; line-height: 1.7;">
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 16px;">
+                    <div style="font-size: 0.9em; font-weight: 700; color: var(--accent); margin-bottom: 4px;">Auditálhatóság</div>
+                    <div class="label" style="text-align: left; font-size: 0.78em; line-height: 1.4;">
                         Független kulcsszó-annotáció<br>
                         Verbatim idézetek (AI + kulcsszó)<br>
                         Szöveges indoklás minden döntéshez<br>
                         Manuális felülbírálat lehetősége
                     </div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; padding: 22px;">
-                    <div style="font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 8px;">Reprodukálhatóság</div>
-                    <div class="label" style="text-align: left; font-size: 0.9em; line-height: 1.7;">
+                <div class="card fragment fade-up" style="text-align: left; padding: 14px 16px;">
+                    <div style="font-size: 0.9em; font-weight: 700; color: var(--accent); margin-bottom: 4px;">Reprodukálhatóság</div>
+                    <div class="label" style="text-align: left; font-size: 0.78em; line-height: 1.4;">
                         Determinisztikus (temperature = 0)<br>
                         Dual-screener: két független AI döntéshozó<br>
                         Resume támogatás (batch + sequential)<br>
