@@ -2,7 +2,10 @@
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>AI-alapú szisztematikus review screening — ERA/JSpA</title>
     <style id="reveal-core-css">
 /*!
@@ -30,7 +33,8 @@
             --text-muted: #888888;
         }
 
-        html, body { background: var(--bg-dark) !important; margin: 0; padding: 0; }
+        html, body { background: var(--bg-dark) !important; margin: 0; padding: 0; overflow: hidden; height: 100%; width: 100%; position: fixed; }
+        html { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
         .reveal-viewport { background: var(--bg-dark) !important; }
         .reveal { background: var(--bg-dark) !important; }
 
@@ -1303,10 +1307,27 @@
         width: 1920,
         height: 1080,
         margin: 0.04,
-        minScale: 0.2,
+        minScale: 0.1,
         maxScale: 2.0,
         display: 'flex',
+        embedded: false,
+        disableLayout: false,
         plugins: [ RevealNotes ],
+    });
+
+    // Fix iOS rotation crash: debounce resize and force layout recalculation
+    let resizeTimeout;
+    window.addEventListener('orientationchange', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            Reveal.layout();
+        }, 300);
+    });
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            Reveal.layout();
+        }, 200);
     });
 
     const counter = document.getElementById('slide-counter');
