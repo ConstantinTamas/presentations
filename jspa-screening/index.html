@@ -1475,6 +1475,44 @@
             nav.classList.remove('visible');
         });
     });
+
+    // --- Fullscreen on landscape ---
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+    function tryFullscreen() {
+        const el = document.documentElement;
+        if (document.fullscreenElement) return;
+        if (el.requestFullscreen) el.requestFullscreen().catch(()=>{});
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    }
+
+    function handleOrientation() {
+        const isLandscape = window.innerWidth > window.innerHeight;
+        if (isLandscape && !isIOS) {
+            tryFullscreen();
+        }
+        if (isLandscape && isIOS && !isStandalone) {
+            showIOSHint();
+        }
+    }
+
+    // iOS hint banner
+    function showIOSHint() {
+        if (document.getElementById('ios-hint') || isStandalone) return;
+        const hint = document.createElement('div');
+        hint.id = 'ios-hint';
+        hint.innerHTML = 'Teljes képernyőhöz: <strong>Megosztás ⎋ → Főképernyőre</strong>';
+        hint.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(79,195,247,0.95);color:#0d0d24;text-align:center;padding:8px 16px;font-size:13px;font-weight:500;z-index:9999;cursor:pointer;font-family:-apple-system,sans-serif;';
+        hint.addEventListener('click', () => hint.remove());
+        document.body.appendChild(hint);
+        setTimeout(() => { if (hint.parentNode) hint.remove(); }, 6000);
+    }
+
+    window.addEventListener('orientationchange', () => setTimeout(handleOrientation, 400));
+    window.addEventListener('resize', () => setTimeout(handleOrientation, 300));
+    // Check on load too
+    setTimeout(handleOrientation, 1000);
 </script>
 </body>
 </html>
