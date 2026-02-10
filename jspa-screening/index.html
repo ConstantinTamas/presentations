@@ -49,6 +49,8 @@
             display: flex !important;
             flex-direction: column;
             justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
             height: 100%;
         }
 
@@ -304,6 +306,7 @@
         @media print {
             #chapter-nav, #slide-counter, #menu-hint { display: none !important; }
         }
+
 
         /* ===== Desktop overflow fixes: per-slide compacting ===== */
         /* Reveal.js viewport: 1920x1080, margin 0.04
@@ -891,6 +894,14 @@
         /* --- Slide 1: Title — center all content vertically --- */
         section#title {
             justify-content: center !important;
+            overflow: visible !important;
+            padding-top: 20px !important;
+        }
+        
+        section#title img {
+            max-width: calc(100% - 40px) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
 
         /* --- Slide 2: A kihivas — card-grid is the main growable area --- */
@@ -1272,6 +1283,7 @@
 
 <div id="slide-counter"></div>
 <div id="menu-hint">Nyomj <kbd>M</kbd> a menühöz · <kbd>S</kbd> előadói jegyzetek · <kbd>F</kbd> teljes képernyő</div>
+
 
 <div class="reveal">
     <div class="slides">
@@ -2163,52 +2175,59 @@
                     </div>
                 </div>
                 <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--maybe);">
-                    <div style="font-size: 1.1em; font-weight: 700; color: var(--maybe); margin-bottom: 10px;">2. OpenAI túlzott szigor</div>
+                    <div style="font-size: 1.1em; font-weight: 700; color: var(--maybe); margin-bottom: 10px;">2. AH2/DR2 prompt-ellentmondás</div>
                     <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.6;">
-                        Diagnosztikus/klasszifikációs vizsgálatokat összemosta a "nem releváns" kategóriával
+                        Két prompt-szabály egymásnak ellentmondott:<br>
+                        <strong>AH2</strong>: <em style="color: var(--text-muted); font-size: 0.9em;">"if ERA/JSpA not mentioned &rarr; don't assume"</em><br>
+                        <strong>DR2</strong>: <em style="color: var(--text-muted); font-size: 0.9em;">"general JIA without subtype &rarr; MAYBE"</em>
                     </div>
                     <div style="margin-top: 14px; padding: 10px 14px; background: rgba(255,167,38,0.08); border-radius: 8px;">
-                        <span style="font-size: 0.85em; color: var(--text-muted);">Kizárt olyan vizsgálatokat, ahol az imaging eszköznek disease activity komponense is volt — holott ezek MAYBE-ként kellettek volna</span>
+                        <span style="font-size: 0.85em; color: var(--text-muted);">OpenAI az AH2 kulcsszólistát kötelező checklistként használta &rarr; general JIA cikkeket EXCLUDE-olt, holott DR2 szerint MAYBE kellett volna</span>
                     </div>
                 </div>
             </div>
             <aside class="notes">
-                Két gyökérokot azonosítottunk. Claude sycophancy: a konszenzus prompt kifejezetten bátorította az engedést, és Claude ezt szó szerint vette — 152 esetben változtatott. A második gyökérok: OpenAI túl szigorúan húzta meg a diagnosztikus/klasszifikációs határt.
+                Két gyökérokot azonosítottunk. Claude sycophancy: a konszenzus prompt kifejezetten bátorította az engedést, és Claude ezt szó szerint vette — 152 esetben változtatott. A második gyökérok: az AH2 és DR2 prompt-szabályok ellentmondtak egymásnak. Az AH2 anti-hallucináció szabály felsorolta az ERA/JSpA kulcsszavakat, és azt mondta, ha nincsenek explicit említve, ne feltételezzük. Az OpenAI ezt kötelező checklistként értelmezte, és kizárta az általános JIA cikkeket — holott a DR2 szabály szerint ezeket MAYBE-nek kellett volna jelölni. Tehát két sor prompt szöveg ellentmondása okozta az OpenAI túlzott szigorát.
             </aside>
         </section>
 
         <!-- ==================== LESSONS LEARNED: FIXES ==================== -->
         <section id="consensus-fixes" data-chapter="lessons">
-            <h2>Javítások</h2>
-            <p style="color: var(--text-secondary);">A promptok átírása a két gyökérok alapján</p>
-            <div class="card-grid cols-2" style="margin-top: 20px;">
-                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--include);">
-                    <div style="font-size: 1.1em; font-weight: 700; color: var(--include); margin-bottom: 10px;">Anti-sycophancy konszenzus prompt</div>
-                    <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.7;">
-                        4 kritikus elv:<br>
-                        <span style="color: var(--accent);">&#9654;</span> Defend your rules-based reasoning<br>
-                        <span style="color: var(--accent);">&#9654;</span> Asymmetric change threshold<br>
-                        <span style="color: var(--accent);">&#9654;</span> Do not seek agreement<br>
-                        <span style="color: var(--accent);">&#9654;</span> Evaluate, don't defer
+            <h2>Iteráció és végső döntés</h2>
+            <p style="color: var(--text-secondary);">Három futtatás &mdash; javuló kappa, de strukturális korlátok</p>
+            <div class="card-grid cols-3" style="margin-top: 20px;">
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--exclude); padding: 12px 14px;">
+                    <div style="font-size: 0.95em; font-weight: 700; color: var(--exclude); margin-bottom: 8px;">Run #1</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em; line-height: 1.6;">
+                        &kappa; = <strong>0.308</strong> (fair)<br>
+                        Sycophancy: <strong>84.9%</strong><br>
+                        <span style="color: var(--text-muted);">Konszenzus egyoldalú</span>
                     </div>
                 </div>
-                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--include);">
-                    <div style="font-size: 1.1em; font-weight: 700; color: var(--include); margin-bottom: 10px;">R1 prompt pontosítás</div>
-                    <div class="label" style="text-align: left; font-size: 0.95em; line-height: 1.7;">
-                        3 helyen módosítva:<br>
-                        <span style="color: var(--accent);">&#9654;</span> Kizárási kritérium: diagnosztikus <em>vs.</em> disease activity<br>
-                        <span style="color: var(--accent);">&#9654;</span> EX2 minta kiegészítés<br>
-                        <span style="color: var(--accent);">&#9654;</span> Új IN4 rescue pattern: imaging + DA komponens
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--maybe); padding: 12px 14px;">
+                    <div style="font-size: 0.95em; font-weight: 700; color: var(--maybe); margin-bottom: 8px;">Run #2</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em; line-height: 1.6;">
+                        &kappa; = <strong>0.367</strong> (fair)<br>
+                        Sycophancy: <strong>64.8%</strong><br>
+                        <span style="color: var(--text-muted);">Anti-sycophancy prompt &rarr; plafon</span>
+                    </div>
+                </div>
+                <div class="card fragment fade-up" style="text-align: left; border-left: 4px solid var(--include); padding: 12px 14px;">
+                    <div style="font-size: 0.95em; font-weight: 700; color: var(--include); margin-bottom: 8px;">Run #3</div>
+                    <div class="label" style="text-align: left; font-size: 0.85em; line-height: 1.6;">
+                        &kappa; = <strong>0.671</strong> (substantial)<br>
+                        AH2 eltávolítva + DR2 bővítve<br>
+                        <span style="color: var(--text-muted);">"Kompenzációs paradoxon"</span>
                     </div>
                 </div>
             </div>
-            <div class="callout fragment fade-up" style="margin-top: 24px;">
+            <div class="callout fragment fade-up" style="margin-top: 20px; border-left: 4px solid var(--exclude);">
                 <p style="color: var(--text-primary);">
-                    A dual-screener megközelítés <strong>működik</strong> &mdash; de a prompt tervezés kritikus. Az LLM-ek közötti konszenzus aktív védelmet igényel a sycophancy és a túlzott szigor ellen.
+                    A dual-screener megközelítés <strong style="color: var(--exclude);">nem működött</strong>. A sycophancy ~65%-on platózott, a konszenzus körök szisztematikusan EXCLUDE felé tolták a döntést. <strong>Végső döntés:</strong> single-screener &mdash; Claude R1, Run #3 prompt. A dual kísérlet értéke: <span class="accent">prompt QA eszközként</span> felfedte az AH2/DR2 ellentmondást.
                 </p>
             </div>
             <aside class="notes">
-                A javítások: anti-sycophancy konszenzus prompt 4 kritikus elvvel, és R1 prompt pontosítás 3 helyen. A tanulság: a dual-screener megközelítés értékes, de a prompt tervezés kritikus.
+                Három futtatáson át iteráltunk. Run #1: kappa 0.308, Claude 84.9%-ban engedett. Run #2: anti-sycophancy prompt hozzáadva, kappa 0.367, sycophancy 64.8%-ra csökkent de platózott. Run #3: AH2 kulcsszólista eltávolítva, DR2 bővítve — kappa 0.671, de ez "kompenzációs paradoxon" volt: Claude R1 túl-konzervatív, R2-ben sycophancy, a kettő kioltotta egymást, helyes eredmény rossz logikával. Végső döntés: dual-screener elhagyva. Single-screener választva: Claude R1 a Run #3 prompttal. 54 INCLUDE + 232 MAYBE = 286 cikk full-text review-ra. A dual kísérlet értéke az volt, hogy prompt QA eszközként felfedte az AH2/DR2 ellentmondást.
             </aside>
         </section>
 
@@ -2233,32 +2252,32 @@
                 <div class="flow-arrow fragment fade-up" style="padding: 0; font-size: 1em; line-height: 1;">↓</div>
                 <div class="flow-step fragment fade-up" style="border-color: var(--accent); min-width: 520px; padding: 7px 20px;">
                     <strong style="color: var(--accent);">Title/Abstract Screening</strong><br>
-                    <span style="font-size: 0.82em;">Claude Opus 4.6 + OpenAI o3 · dual screening · <strong style="color: var(--text-primary);">1316</strong> cikk értékelve</span>
+                    <span style="font-size: 0.82em;">Claude Opus 4.6 &middot; single screener &middot; <strong style="color: var(--text-primary);">1316</strong> cikk értékelve</span>
                 </div>
                 <div class="flow-arrow fragment fade-up" style="padding: 0; font-size: 1em; line-height: 1;">↓</div>
                 <div style="display: flex; align-items: flex-start; gap: 16px; justify-content: center;" class="fragment fade-up">
                     <div class="flow-step" style="border-color: var(--include); min-width: auto; padding: 8px 20px;">
                         <span style="color: var(--include); font-weight: 700;">INCLUDE</span><br>
-                        <span style="font-size: 1.05em; font-weight: 800; color: var(--include);">63</span><br>
-                        <span style="font-size: 0.75em; color: var(--text-muted);">→ full-text review</span>
+                        <span style="font-size: 1.05em; font-weight: 800; color: var(--include);">54</span><br>
+                        <span style="font-size: 0.75em; color: var(--text-muted);">&rarr; full-text review</span>
                     </div>
                     <div class="flow-step" style="border-color: var(--maybe); min-width: auto; padding: 8px 20px;">
                         <span style="color: var(--maybe); font-weight: 700;">MAYBE</span><br>
-                        <span style="font-size: 1.05em; font-weight: 800; color: var(--maybe);">145</span><br>
-                        <span style="font-size: 0.75em; color: var(--text-muted);">→ manuális felülvizsgálat</span>
+                        <span style="font-size: 1.05em; font-weight: 800; color: var(--maybe);">232</span><br>
+                        <span style="font-size: 0.75em; color: var(--text-muted);">&rarr; manuális felülvizsgálat</span>
                     </div>
                     <div class="flow-step" style="border-color: var(--exclude); min-width: auto; padding: 8px 20px;">
                         <span style="color: var(--exclude); font-weight: 700;">EXCLUDE</span><br>
-                        <span style="font-size: 1.05em; font-weight: 800; color: var(--exclude);">1108</span><br>
-                        <span style="font-size: 0.75em; color: var(--text-muted);">→ kizárva indoklással</span>
+                        <span style="font-size: 1.05em; font-weight: 800; color: var(--exclude);">1030</span><br>
+                        <span style="font-size: 0.75em; color: var(--text-muted);">&rarr; kizárva indoklással</span>
                     </div>
                 </div>
             </div>
             <p class="fragment fade-up" style="text-align: center; margin-top: 6px; color: var(--text-muted); font-size: 0.88em;">
-                A reviewer <strong style="color: var(--text-primary);">208 cikket</strong> (INCLUDE + MAYBE) vizsgál tovább az <strong style="color: var(--text-primary);">1316</strong>-ból — <span class="accent">84%</span> munka megtakarítás.
+                A reviewer <strong style="color: var(--text-primary);">286 cikket</strong> (INCLUDE + MAYBE) vizsgál tovább az <strong style="color: var(--text-primary);">1316</strong>-ból &mdash; <span class="accent">78%</span> munka megtakarítás.
             </p>
             <aside class="notes">
-                A PRISMA flow diagram a konkrét adatokat mutatja. A PubMed-ból 626, az Embase-ból 1047 rekordot azonosítottunk, összesen 1673-at. A duplikátumszűrés 357 ismétlődést távolított el, így 1316 egyedi cikk maradt. Az AI screening ezekből 63-at INCLUDE-nak, 145-öt MAYBE-nek, és 1108-at EXCLUDE-nak jelölt. A reviewer tehát 208 cikket vizsgál tovább — az 1316 egyedi cikkből ez 84%-os munka-megtakarítás.
+                A PRISMA flow diagram a konkrét adatokat mutatja. A PubMed-ból 626, az Embase-ból 1047 rekordot azonosítottunk, összesen 1673-at. A duplikátumszűrés 357 ismétlődést távolított el, így 1316 egyedi cikk maradt. A single-screener (Claude R1, Run #3 prompt) ezekből 54-et INCLUDE-nak, 232-t MAYBE-nek, és 1030-at EXCLUDE-nak jelölt. A reviewer tehát 286 cikket vizsgál tovább — az 1316 egyedi cikkből ez 78%-os munka-megtakarítás.
             </aside>
         </section>
 
@@ -2288,7 +2307,7 @@
                 </p>
             </div>
             <aside class="notes">
-                A fejlesztés körülbelül két munkanapot vett igénybe — iteratív fejlesztés Claude Code segítségével, folyamatos finomhangolás a kritériumokon és a prompt-on. A futásidő batch módban nagyjából 30 perc több ezer cikkre, az API költség 5-10 dollár körül mozog. Összehasonlításképpen: a Cochrane irodalom szerint egy tapasztalt reviewer 1-2 percet tölt cikkenként title/abstract screening-nél. 1300 cikknél ez kb. 30-45 óra egyedül — és a standard kettős független screening-gel ennek a duplája, tehát 2-3 hét munkaidő. A rendszer nem helyettesíti a reviewert, de a munka nagy részét elvégzi: a reviewer az INCLUDE és MAYBE cikkekre koncentrálhat.
+                A fejlesztés körülbelül két munkanapot vett igénybe — iteratív fejlesztés Claude Code segítségével, folyamatos finomhangolás a kritériumokon és a prompt-on, beleértve a dual-screener kísérlet három futtatását is. A futásidő batch módban nagyjából 30 perc több ezer cikkre, az API költség 5-10 dollár körül mozog. A végső single-screener futtatás ennél is gyorsabb volt. Összehasonlításképpen: a Cochrane irodalom szerint egy tapasztalt reviewer 1-2 percet tölt cikkenként title/abstract screening-nél. 1300 cikknél ez kb. 30-45 óra egyedül — és a standard kettős független screening-gel ennek a duplája, tehát 2-3 hét munkaidő. A rendszer nem helyettesíti a reviewert, de a munka nagy részét elvégzi: a reviewer a 286 INCLUDE + MAYBE cikkre koncentrálhat.
             </aside>
         </section>
 
@@ -2325,15 +2344,15 @@
                     <div class="label" style="text-align: left; font-size: 0.85em;">Az AI segít, de a végső döntés a revieweré</div>
                 </div>
             </div>
-            <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px; margin-top: 10px; border: 1px solid rgba(102,187,106,0.3);">
+            <div class="card fragment fade-up" style="text-align: left; padding: 14px 18px; margin-top: 10px; border: 1px solid rgba(255,167,38,0.3);">
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                    <span style="font-size: 1.3em;">🤝</span>
-                    <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Kettős AI screening</span>
+                    <span style="font-size: 1.3em;">🧪</span>
+                    <span style="font-size: 0.95em; font-weight: 700; color: var(--text-primary);">Dual-screener kísérlet</span>
                 </div>
-                <div class="label" style="text-align: left; font-size: 0.85em;">Két független LLM, Cohen's kappa egyezés-elemzéssel</div>
+                <div class="label" style="text-align: left; font-size: 0.85em;">Megközelítés elhagyva &mdash; de prompt QA eszközként felfedte a rejtett ellentmondásokat</div>
             </div>
             <aside class="notes">
-                Konklúzióként öt fő előnye van a rendszernek. Először, a konzisztens döntéshozás: ugyanazok a kritériumok, fáradtság nélkül. Másodszor, átlátható és auditálható: indoklás, idézet, belső ellenőrzés minden döntéshez. Harmadszor, konzervatív: kétség esetén MAYBE. Negyedszer, az emberi felülbírálat mindig adott. Ötödször, a kettős AI screening: két független LLM — Claude és OpenAI — egymástól függetlenül értékel, és a Cohen's kappa egyezés-elemzés számszerűsíti a megbízhatóságot.
+                Konklúzióként öt fő tanulság. Először, a konzisztens döntéshozás: ugyanazok a kritériumok, fáradtság nélkül. Másodszor, átlátható és auditálható: indoklás, idézet, belső ellenőrzés minden döntéshez. Harmadszor, konzervatív: kétség esetén MAYBE. Negyedszer, az emberi felülbírálat mindig adott. Ötödször, a dual-screener kísérlet: a Claude + OpenAI megközelítést végül elhagytuk a sycophancy és az egyoldalú konszenzus miatt, de a kísérlet értékes volt, mert felfedte az AH2/DR2 prompt-ellentmondást. A végső screening single-screener módszerrel történt (Claude R1, Run #3 prompt).
             </aside>
         </section>
 
@@ -2345,7 +2364,7 @@
                     <div style="font-size: 0.9em; font-weight: 700; color: var(--accent); margin-bottom: 4px;">Implementáció</div>
                     <div class="label" style="text-align: left; font-size: 0.78em; line-height: 1.4;">
                         Python, ~2520 sor, egyetlen fájl<br>
-                        Claude Opus 4.6 + OpenAI o3 (dual screening)<br>
+                        Claude Opus 4.6 (single screener)<br>
                         rapidfuzz fuzzy matching (deduplikáció)<br>
                         openpyxl (Excel generálás)
                     </div>
@@ -2373,14 +2392,14 @@
                     <div style="font-size: 0.9em; font-weight: 700; color: var(--accent); margin-bottom: 4px;">Reprodukálhatóság</div>
                     <div class="label" style="text-align: left; font-size: 0.78em; line-height: 1.4;">
                         Determinisztikus (temperature = 0)<br>
-                        Dual-screener: két független AI döntéshozó<br>
+                        Dual-screener kísérlet: prompt QA eszközként értékes<br>
                         Resume támogatás (batch + sequential)<br>
                         Teljes módszertan dokumentálva
                     </div>
                 </div>
             </div>
             <aside class="notes">
-                A technikai összefoglalón végigmenve: az implementáció egyetlen Python fájl, mintegy 2520 sor kód. Két AI modell — Claude Opus 4.6 és OpenAI o3 — egymástól függetlenül screenelik a cikkeket, temperature nullával a determinisztikus kimenetért. A módszertani garanciák közé tartozik a 6 anti-hallucináció szabály, az 5 belső validációs ellenőrzés, a részletes EXCLUDE/INCLUDE minták és a Cohen's kappa inter-rater agreement. Az auditálhatóságot a független kulcsszó-annotáció, a verbatim idézetek és a szöveges indoklás biztosítja. A reprodukálhatóságot a determinisztikus beállítás, a két független AI döntéshozó, a resume támogatás és a teljes dokumentáció garantálja.
+                A technikai összefoglalón végigmenve: az implementáció egyetlen Python fájl, mintegy 2520 sor kód. A végső screening Claude Opus 4.6 single-screenerrel történt, temperature nullával a determinisztikus kimenetért. A dual-screener kísérletet (Claude + OpenAI o3) elhagytuk, de prompt QA eszközként értékes volt — felfedte az AH2/DR2 ellentmondást. A módszertani garanciák közé tartozik a 6 anti-hallucináció szabály, az 5 belső validációs ellenőrzés, a részletes EXCLUDE/INCLUDE minták és a Cohen's kappa inter-rater agreement. Az auditálhatóságot a független kulcsszó-annotáció, a verbatim idézetek és a szöveges indoklás biztosítja. A reprodukálhatóságot a determinisztikus beállítás, a resume támogatás és a teljes dokumentáció garantálja.
             </aside>
         </section>
 
@@ -2478,6 +2497,7 @@
     }
     Reveal.on('slidechanged', updateChapterHighlight);
     Reveal.on('ready', updateChapterHighlight);
+
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'm' || e.key === 'M') {
